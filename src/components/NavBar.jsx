@@ -1,19 +1,29 @@
-import CartWidget from './CartWidget.jsx'
-import { Link, NavLink } from "react-router-dom"
+import { NavLink } from "react-router-dom";
 
-export default function NavBar(){
+const CATS = [
+  { id: "pastas", label: "Pastas" },
+  { id: "barbotinas", label: "Barbotinas" },
+  { id: "esmaltes", label: "Esmaltes" },
+];
+
+export default function NavBar() {
   return (
     <header className="nav">
-      <Link to="/" className="logo">Arcillas Argentinas</Link>
-      <nav className="nav__links" aria-label="principal">
-        <NavLink to="/" className="nav__link">Inicio</NavLink>
-        <NavLink to="/productos" className="nav__link">Productos</NavLink>
-        <NavLink to="/productos#usos" className="nav__link">Usos</NavLink>
-        <NavLink to="/sobre" className="nav__link">Quiénes somos</NavLink>
+      <NavLink to="/" className="brand">Arcillas Argentinas</NavLink>
+
+      <nav className="links">
+        <NavLink to="/">Inicio</NavLink>
+        <NavLink to="/productos">Productos</NavLink>
+        <NavLink to="/sobre">Sobre</NavLink>
       </nav>
-      <div className="nav__actions">
-        <CartWidget count={0}/>
-      </div>
+
+      <nav className="links">
+        {CATS.map(c => (
+          <NavLink key={c.id} to={`/productos/categoria/${c.id}`}>
+            {c.label}
+          </NavLink>
+        ))}
+      </nav>
     </header>
-  )
+  );
 }

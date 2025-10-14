@@ -1,6 +1,8 @@
 import { Routes, Route } from "react-router-dom";
 import NavBar from "./components/NavBar.jsx";
 import ItemListContainer from "./components/ItemListContainer.jsx";
+import ItemDetailContainer from "./components/ItemDetailContainer.jsx";
+import NotFound from "./components/NotFound.jsx";
 import Home from "./pages/Home.jsx";
 import Productos from "./pages/Productos.jsx";
 import Sobre from "./pages/Sobre.jsx";
@@ -12,9 +14,15 @@ export default function App() {
       <main className="wrapper">
         <Routes>
           <Route path="/" element={<Home />} />
-          {/* Si querés mantener el saludo del ItemListContainer en Home, lo dejas; para productos usamos la página nueva */}
-          <Route path="/productos" element={<Productos />} />
+
+          <Route path="/productos/*" element={<Productos />}>
+            <Route index element={<ItemListContainer />} />
+            <Route path="categoria/:catId" element={<ItemListContainer />} />
+            <Route path="item/:id" element={<ItemDetailContainer />} />
+          </Route>
+
           <Route path="/sobre" element={<Sobre />} />
+          <Route path="*" element={<NotFound />} />
         </Routes>
       </main>
     </>

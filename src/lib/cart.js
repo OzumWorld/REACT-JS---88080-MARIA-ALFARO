@@ -1,8 +1,12 @@
+// src/lib/cart.js
 export const STORAGE_KEY = 'aa_carrito_v1';
 
 export function loadCart() {
-  try { return JSON.parse(localStorage.getItem(STORAGE_KEY)) || []; }
-  catch { return []; }
+  try {
+    return JSON.parse(localStorage.getItem(STORAGE_KEY)) || [];
+  } catch {
+    return [];
+  }
 }
 
 export function saveCart(cart) {
