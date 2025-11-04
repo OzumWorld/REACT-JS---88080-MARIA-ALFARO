@@ -5,23 +5,22 @@ import Loader from "./Loader.jsx";
 import ItemDetail from "./presentational/ItemDetail.jsx";
 
 export default function ItemDetailContainer() {
-  const { id: rawId } = useParams();
-  const id = rawId ? decodeURIComponent(rawId) : ""; 
+  const { id } = useParams();
 
-  const [item, setItem] = useState(null);
-  const [loading, setLoading] = useState(true);
-  const [error, setError] = useState("");
+const [item, setItem] = useState(null);
+const [loading, setLoading] = useState(true);
+const [error, setError] = useState("");
 
-  useEffect(() => {
-    if (!id) return;          
-    setLoading(true);
-    setError("");
+useEffect(() => {
+  if (!id) return;          
+  setLoading(true);
+  setError("");
 
-    fetchProductById(String(id)) 
-      .then(setItem)
-      .catch((e) => setError(e.message))
-      .finally(() => setLoading(false));
-  }, [id]);
+  fetchProductById(id)
+    .then(setItem)
+    .catch((e) => setError(e.message))
+    .finally(() => setLoading(false));
+}, [id]);
 
   if (loading) return <Loader />;
   if (error)   return <p className="error">{error}</p>;

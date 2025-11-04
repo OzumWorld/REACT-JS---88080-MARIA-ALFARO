@@ -13,10 +13,13 @@ export default function ItemListContainer() {
     setLoading(true);
     fetchProducts(catId)
       .then(setItems)
+      .catch((err) => console.error("Error al traer productos:", err.message))
       .finally(() => setLoading(false));
   }, [catId]);
 
   if (loading) return <Loader />;
+  if (!items.length && !loading) return <p>No hay productos.</p>;
+
   return (
     <section>
       <ItemList items={items} />

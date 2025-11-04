@@ -1,11 +1,15 @@
-// src/components/presentational/ItemDetail.jsx
 import ItemCount from "./ItemCount.jsx";
-// Si ya creaste el carrito, descomenta la línea de abajo y úsalo:
-// import { useCart } from "../../context/CartContext.jsx";
 
 export default function ItemDetail({ item }) {
-  // const { addItem } = useCart(); // si usás contexto
+  const { addItem } = useCart();
+  const [added, setAdded] = useState(0);
+
   if (!item) return null;
+
+  const handleAdd = (qty) => {
+    addItem(item, qty);
+    setAdded(qty);
+  };
 
   return (
     <div className="detail" style={{ display: "grid", gridTemplateColumns: "320px 1fr", gap: 24 }}>
@@ -38,9 +42,6 @@ export default function ItemDetail({ item }) {
         <ItemCount
           stock={99}
           initial={1}
-          // Si usás contexto:
-          // onAdd={(qty) => addItem(item, qty)}
-          // Si todavía no:
           onAdd={(qty) => console.log("Agregar", qty, item.id)}
         />
       </div>

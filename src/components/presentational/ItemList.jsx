@@ -1,7 +1,10 @@
 import ItemCard from "./ItemCard";
 
 export default function ItemList({ items }) {
-  if (!items.length) return <p>No hay productos en esta categoría.</p>;
+  if (!items || items.length === 0) {
+    return <p>No hay productos en esta categoría.</p>;
+  }
+
   return (
     <div className="grid">
       {items.map((prod) => (
@@ -10,3 +13,4 @@ export default function ItemList({ items }) {
     </div>
   );
 }
+

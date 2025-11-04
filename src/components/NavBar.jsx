@@ -1,5 +1,7 @@
 import { NavLink } from "react-router-dom";
+import CartWidget from "./CartWidget";
 
+// 💡 Definí CATS antes del componente
 const CATS = [
   { id: "pastas", label: "Pastas" },
   { id: "barbotinas", label: "Barbotinas" },
@@ -18,12 +20,14 @@ export default function NavBar() {
       </nav>
 
       <nav className="links">
-        {CATS.map(c => (
-          <NavLink key={c.id} to={`/productos/categoria/${c.id}`}>
+        {CATS.map((c) => (
+          <NavLink key={c.id} to={`/categoria/${c.id}`}>
             {c.label}
           </NavLink>
         ))}
       </nav>
+
+      <CartWidget />
     </header>
   );
 }

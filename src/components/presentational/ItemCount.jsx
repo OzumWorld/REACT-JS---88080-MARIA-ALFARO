@@ -9,7 +9,9 @@ export default function ItemCount({ stock=0, initial=1, onAdd }) {
         <span>{qty}</span>
         <button disabled={qty>=stock} onClick={()=>setQty(qty+1)}>+</button>
       </div>
-      <button className="btn" onClick={()=>onAdd?.(qty)}>Agregar al carrito</button>
+      <button className="btn" disabled={stock === 0} onClick={()=>onAdd?.(qty)}>
+        Agregar al carrito
+      </button>
     </div>
   );
 }

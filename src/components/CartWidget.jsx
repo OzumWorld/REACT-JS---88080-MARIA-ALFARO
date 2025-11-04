@@ -1,15 +1,13 @@
-// src/components/CartWidget.jsx
-import { useEffect, useState } from 'react';
-import { loadCart } from '../lib/cart.js';
+import { useCart } from "../context/CartContext.jsx";
 
 export default function CartWidget() {
-  const [count, setCount] = useState(0);
-  useEffect(() => {
-    setCount(loadCart().reduce((acc, it) => acc + it.cantidad, 0));
-  }, []);
+  const { totalUnits } = useCart(); // viene del Context
+
   return (
-    <div className="nav__cart">
-      🛒 <span className="badge">{count}</span>
+    <div className="nav__cart" style={{ display: "flex", alignItems: "center", gap: 8 }}>
+      <span role="img" aria-label="Carrito">🛒</span>
+      <span className="badge">{totalUnits}</span>
     </div>
   );
 }
+
