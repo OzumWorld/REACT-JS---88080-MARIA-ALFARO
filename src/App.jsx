@@ -1,5 +1,7 @@
+// src/App.jsx
 import { useEffect } from "react";
 import { Routes, Route } from "react-router-dom";
+
 import NavBar from "./components/NavBar";
 import Home from "./pages/Home";
 import Productos from "./pages/Productos";
@@ -8,10 +10,12 @@ import NotFound from "./components/NotFound";
 import ItemListContainer from "./components/ItemListContainer";
 import ItemDetailContainer from "./components/ItemDetailContainer";
 import Cart from "./components/Cart";
+
 import { db } from "./firebase/config";
 import { collection, getDocs } from "firebase/firestore";
 
 export default function App() {
+  // Test de conexión a Firestore (solo al cargar la app)
   useEffect(() => {
     async function testFirestore() {
       try {
@@ -43,3 +47,4 @@ export default function App() {
     </>
   );
 }
+
