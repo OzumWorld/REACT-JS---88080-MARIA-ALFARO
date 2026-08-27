@@ -10,12 +10,14 @@ import ItemListContainer from "./components/ItemListContainer";
 import ItemDetailContainer from "./components/ItemDetailContainer";
 import Cart from "./components/Cart";
 import Checkout from "./pages/Checkout";
+import SiteFooter from "./components/SiteFooter.jsx";
 
 export default function App() {
   return (
     <>
+      <a className="skip-link" href="#contenido">Saltar al contenido</a>
       <NavBar />
-      <main>
+      <main id="contenido">
         <Routes>
           <Route path="/" element={<Home />} />
           <Route path="/sobre" element={<Sobre />} />
@@ -29,6 +31,7 @@ export default function App() {
           <Route path="*" element={<NotFound />} />
         </Routes>
       </main>
+      <SiteFooter />
     </>
   );
 }

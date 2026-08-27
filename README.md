@@ -1,16 +1,29 @@
-<<<<<<< HEAD
-# REACT-JS---88080-MARIA-ALFARO
-=======
-# React + Vite
+# Arcillas Argentinas
 
-This template provides a minimal setup to get React working in Vite with HMR and some ESLint rules.
+Aplicación React para consultar el catálogo, armar un pedido, elegir un punto de retiro y enviarlo por WhatsApp al contacto correspondiente.
 
-Currently, two official plugins are available:
+## Desarrollo
 
-- [@vitejs/plugin-react](https://github.com/vitejs/vite-plugin-react/blob/main/packages/plugin-react) uses [Babel](https://babeljs.io/) for Fast Refresh
-- [@vitejs/plugin-react-swc](https://github.com/vitejs/vite-plugin-react/blob/main/packages/plugin-react-swc) uses [SWC](https://swc.rs/) for Fast Refresh
+```bash
+npm ci
+npm run dev
+```
 
-## Expanding the ESLint configuration
+## Verificaciones
 
-If you are developing a production application, we recommend using TypeScript with type-aware lint rules enabled. Check out the [TS template](https://github.com/vitejs/vite/tree/main/packages/create-vite/template-react-ts) for information on how to integrate TypeScript and [`typescript-eslint`](https://typescript-eslint.io) in your project.
->>>>>>> b59870b (Subida inicial del proyecto React JS)
+```bash
+npm test
+npm run lint
+npm run build
+```
+
+## Publicación
+
+El workflow `.github/workflows/deploy.yml` construye y publica el sitio en GitHub Pages desde `main`. La solución de redirección incluida en `public/404.html` permite recargar rutas internas de la SPA.
+
+## Configuración
+
+- Firebase: variables `VITE_FIREBASE_*` para catálogo y registro opcional de pedidos.
+- Contacto: consultar `docs/CONTACTO.md` y `.env.example`.
+- Puntos de retiro: `src/config/pickupPoints.js`; Olivos permanece deshabilitado de forma reversible.
+- Datos técnicos pendientes: `docs/DATOS_TECNICOS_PENDIENTES.md`.

@@ -34,6 +34,11 @@ const localProducts = CATALOGO.map((product) => {
 const getLocalProducts = (catId) =>
   catId ? localProducts.filter((product) => product.categoria === catId) : localProducts;
 
+const enrichProduct = (product) => {
+  const localProduct = localProducts.find((local) => local.id === product.id);
+  return localProduct ? { ...localProduct, ...product, img: product.img || localProduct.img, pdf: product.pdf || localProduct.pdf, coccion: product.coccion || localProduct.coccion, descripcion: product.descripcion || localProduct.descripcion } : product;
+};
+
 /**
  * Lista de productos (opcionalmente filtrada por categoría)
  * @param {string|undefined} catId
@@ -46,7 +51,7 @@ export async function fetchProducts(catId) {
   const q = catId ? query(ref, where("categoria", "==", catId)) : ref;
   try {
     const snap = await getDocs(q);
-    const products = snap.docs.map((d) => ({ id: d.id, ...d.data() }));
+    const products = snap.docs.map((d) => enrichProduct({ id: d.id, ...d.data() }));
     return products.length ? products : getLocalProducts(catId);
   } catch {
     return getLocalProducts(catId);
@@ -68,7 +73,7 @@ export async function fetchProductById(id) {
   const ref = doc(db, "products", id);
   try {
     const snap = await getDoc(ref);
-    if (snap.exists()) return { id: snap.id, ...snap.data() };
+    if (snap.exists()) return enrichProduct({ id: snap.id, ...snap.data() });
   } catch {
     // La ficha local mantiene disponible el catálogo si Firestore no responde.
   }

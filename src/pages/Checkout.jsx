@@ -14,9 +14,9 @@ export default function Checkout() {
 
   if (!cart.length) {
     return (
-      <section className="container card">
+      <section className="section container empty-state">
         <p>Tu pedido está vacío.</p>
-        <Link className="btn" to="/productos">Ir al catálogo</Link>
+        <Link className="btn btn--ink" to="/productos">Ir al catálogo</Link>
       </section>
     );
   }
@@ -61,8 +61,9 @@ export default function Checkout() {
   };
 
   return (
-    <section className="container checkout">
-      <div className="card">
+    <section className="section container checkout">
+      <div className="checkout-card">
+        <p className="eyebrow eyebrow--dark">Último paso</p>
         <h1>Completá tu pedido</h1>
         <p>Elegí dónde retirarlo. El punto seleccionado te informará por WhatsApp una fecha posible.</p>
 
@@ -89,7 +90,7 @@ export default function Checkout() {
             <strong>Total estimado</strong>
             <span>{totalPrice.toLocaleString("es-AR", { style: "currency", currency: "ARS" })}</span>
           </div>
-          <button className="btn" disabled={loading}>{loading ? "Preparando…" : "Enviar pedido por WhatsApp"}</button>
+          <button className="btn btn--clay" disabled={loading}>{loading ? "Preparando…" : "Enviar pedido por WhatsApp"}</button>
           {error && <p className="error" role="alert">{error}</p>}
         </form>
       </div>

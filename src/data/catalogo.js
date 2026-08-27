@@ -1,4 +1,6 @@
 
+import { getProductDocumentPath } from "../config/productDocuments.js";
+
 export const CATALOGO = [
     { id: "pasta-lisa-blanca", nombre: "Pasta Lisa Blanca (bolsa 10 kg)", tipo: "pasta",
     precios:{ unidad:13500, pack10:12500, pack20:12000 } },
@@ -14,7 +16,7 @@ export const CATALOGO = [
       precios:{ unidad:10000, pack10:9500, pack20:9000 } },
     { id: "pasta-gres-tostado-oscura", nombre: "Pasta Gres Tostado Oscura (bolsa 5 kg)", tipo: "pasta",
       precios:{ unidad:10000, pack10:9500, pack20:9000 } },
-  
+
     { id: "barbotina", nombre: "Barbotina bidón 9 kg", tipo: "barbotina", precios:{unidad:12000, pack10:10000, pack20:10000} },
     { id: "barbotina-canje", nombre: "Barbotina Canje bidón 9 kg", tipo: "barbotina", precios:{unidad:9500, pack10:8500, pack20:8500} },
     { id: "barbotina-gres-tostado-oscuro", nombre: "Barbotina Gres Tostado Oscuro bidón 9 kg", tipo: "barbotina", precios:{unidad:14000, pack10:12000, pack20:12000} },
@@ -24,65 +26,64 @@ export const CATALOGO = [
     "pasta-lisa-blanca": {
       resumen: "Utilitaria y artística fina. Torneado, modelado y placas.",
       coccion: "1020–1040 °C",
-      pdf: "/fichas/Pasta Lisa Blanca.pdf",
+      pdf: getProductDocumentPath("pasta-lisa-blanca"),
       img: "/img/Pasta Lisa Blanca.jpg"
     },
     "pasta-blanca-con-chamote": {
       resumen: "Piezas medianas/grandes, escultura, relieves.",
       coccion: "1020–1040 °C",
-      pdf: "/fichas/Pasta Blanca con Chamote.pdf",
+      pdf: getProductDocumentPath("pasta-blanca-con-chamote"),
       img: "/img/Pasta Blanca con Chamote.jpg"
     },
     "pasta-roja": {
       resumen: "Versátil para modelado y placas; look cálido.",
       coccion: "1020–1040 °C",
-      pdf: "/fichas/Pasta Roja.pdf",
+      pdf: getProductDocumentPath("pasta-roja"),
       img: "/img/Pasta Roja.jpg"
     },
     "pasta-roja-con-chamote": {
       resumen: "Textura + estabilidad para piezas medianas y escultura.",
       coccion: "1020–1040 °C",
-      pdf: "/fichas/Pasta Roja con Chamote.pdf",
+      pdf: getProductDocumentPath("pasta-roja-con-chamote"),
       img: "/img/Pasta Roja con Chamote.jpg"
     },
     "pasta-fuego-directo": {
       resumen: "Cazuelas / hornallas. Buena resistencia térmica.",
       coccion: "1020–1040 °C",
-      pdf: "/fichas/Pasta Roja Fuego Directo.pdf",
+      pdf: getProductDocumentPath("pasta-roja-fuego-directo"),
       img: "/img/Pasta Roja Fuego Directo.jpg"
     },
     "pasta-gres-tostado-claro": {
       resumen: "Alta resistencia para utilitario. Cone 6–7.",
       coccion: "1240–1250 °C",
-      pdf: "/fichas/Pasta Gres Tostado Claro.pdf",
+      pdf: getProductDocumentPath("pasta-gres-tostado-claro"),
       img: "/img/Pasta Gres Tostado Claro.jpg"
     },
     "pasta-gres-tostado-oscuro": {
       resumen: "Base cálida para esmaltes de alta.",
       coccion: "1240–1250 °C",
-      pdf: "/fichas/Pasta Gres Tostado Oscuro.pdf",
+      pdf: getProductDocumentPath("pasta-gres-tostado-oscura"),
       img: "/img/Pasta Gres Tostado Oscuro.jpg"
     },
     "barbotina": {
       resumen: "Lista para colada. Agitar antes de usar.",
       coccion: "Según pasta final",
-      pdf: "/fichas/Barbotina bidon 9 kg.pdf",
+      pdf: getProductDocumentPath("barbotina"),
       img: "/img/Barbotina bidon 9 kg.jpg"
     },
     "barbotina-canje": {
-      resumen: "Opción económica para series (colada).",
-      coccion: "Según pasta final",
-      pdf: "/fichas/Barbotina bidon 9 kg.pdf",
+      resumen: "Barbotina Canje en presentación de 9 kg.",
+      coccion: "Dato técnico pendiente de confirmación",
+      pdf: null,
       img: "/img/Barbotina bidon 9 kg.jpg"
     },
     "barbotina-gres-tostado-oscuro": {
       resumen: "Colada para gres. Curva de alta.",
       coccion: "1240–1250 °C",
-      pdf: "/fichas/Barbotina para Gres bidon 9 kg.pdf",
+      pdf: getProductDocumentPath("barbotina-gres-tostado-oscuro"),
       img: "/img/Barbotina para Gres bidon 9 kg.jpg"
     }
   };
-  
+
   export const money = (n) =>
     n.toLocaleString("es-AR", { style: "currency", currency: "ARS", maximumFractionDigits: 2 });
-  

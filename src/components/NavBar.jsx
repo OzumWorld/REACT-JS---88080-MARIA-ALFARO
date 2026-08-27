@@ -1,5 +1,6 @@
 import { NavLink } from "react-router-dom";
 import CartWidget from "./CartWidget";
+import Brand from "./Brand.jsx";
 
 const CATS = [
   { id: "pastas", label: "Pastas" },
@@ -9,21 +10,19 @@ const CATS = [
 export default function NavBar() {
   return (
     <header className="nav">
-      <NavLink to="/" className="brand">Arcillas Argentinas</NavLink>
-
-      <nav className="links">
-        <NavLink to="/">Inicio</NavLink>
-        <NavLink to="/productos">Productos</NavLink>
-        <NavLink to="/sobre">Sobre</NavLink>
-      </nav>
-
-      <nav className="links">
-        {CATS.map(c => (
-          <NavLink key={c.id} to={`/productos/categoria/${c.id}`}>{c.label}</NavLink>
-        ))}
-      </nav>
-
-      <CartWidget />
+      <div className="nav__inner">
+        <Brand compact />
+        <nav className="nav__primary" aria-label="Navegación principal">
+          <NavLink to="/" end>Inicio</NavLink>
+          <NavLink to="/productos">Productos</NavLink>
+          {CATS.map(c => (
+            <NavLink className="nav__category" key={c.id} to={`/productos/categoria/${c.id}`}>{c.label}</NavLink>
+          ))}
+          <NavLink to="/sobre">Nosotros</NavLink>
+          <a href="#contacto">Contacto</a>
+        </nav>
+        <CartWidget />
+      </div>
     </header>
   );
 }
