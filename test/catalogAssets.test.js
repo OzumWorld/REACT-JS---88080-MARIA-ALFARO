@@ -50,6 +50,18 @@ test("la identidad del documento ya no usa Vite", () => {
   assert.doesNotMatch(index, /Vite \+ React|vite\.svg/);
 });
 
+test("la marca definitiva separa símbolo, wordmark y variante monocromática", () => {
+  const brand = readFileSync("src/components/Brand.jsx", "utf8");
+  const favicon = readFileSync("public/favicon.svg", "utf8");
+  assert.equal(existsSync("public/brand/arcillas-symbol-color.svg"), true);
+  assert.equal(existsSync("public/brand/arcillas-symbol-mono.svg"), true);
+  assert.match(brand, /BrandSymbol/);
+  assert.match(brand, /BrandWordmark/);
+  assert.match(brand, /brand__wordmark--\$\{tone\}/);
+  assert.match(favicon, /#7b3529/);
+  assert.doesNotMatch(favicon, /gradient|filter|shadow/i);
+});
+
 test("el formulario centraliza el receptor y exige un endpoint Formspree válido", () => {
   const config = readFileSync("src/config/contact.js", "utf8");
   assert.match(config, /recipientEmail: "arcillasargentinas@gmail\.com"/);
