@@ -50,8 +50,19 @@ test("la identidad del documento ya no usa Vite", () => {
   assert.doesNotMatch(index, /Vite \+ React|vite\.svg/);
 });
 
-test("el formulario permanece sin receptor mientras la configuración está pendiente", () => {
+test("el formulario centraliza el receptor y exige un endpoint Formspree válido", () => {
   const config = readFileSync("src/config/contact.js", "utf8");
-  assert.match(config, /recipientEmail: null/);
+  assert.match(config, /recipientEmail: "arcillasargentinas@gmail\.com"/);
   assert.match(config, /VITE_CONTACT_FORM_ENDPOINT \|\| ""/);
+  assert.match(config, /https:\\\/\\\/formspree\\\.io/);
+});
+
+test("la operación pública continúa basada en retiro y no promete envíos nacionales", () => {
+  const publicCopy = [
+    readFileSync("src/pages/Home.jsx", "utf8"),
+    readFileSync("src/pages/Checkout.jsx", "utf8"),
+    readFileSync("src/components/ContactSection.jsx", "utf8"),
+  ].join("\n");
+  assert.match(publicCopy, /puntos? de retiro/i);
+  assert.doesNotMatch(publicCopy, /envíos nacionales|cálculo de envío|tarifa de envío|entregamos en todo el país/i);
 });
