@@ -7,7 +7,8 @@
  */
 export function withBase(p) {
     if (!p) return "";
+    if (/^(https?:|data:|blob:)/i.test(p)) return p;
+    if (String(p).startsWith(import.meta.env.BASE_URL)) return encodeURI(p);
     const cleaned = String(p).replace(/^\/+/, ""); // quita "/" inicial
     return encodeURI(`${import.meta.env.BASE_URL}${cleaned}`);
   }
-  

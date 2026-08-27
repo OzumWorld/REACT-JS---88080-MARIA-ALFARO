@@ -1,4 +1,8 @@
 import ItemCount from "./ItemCount.jsx";
+import { useState } from "react";
+import { Link } from "react-router-dom";
+import { useCart } from "../../context/CartContext.jsx";
+import { withBase } from "../../lib/paths.js";
 
 export default function ItemDetail({ item }) {
   const { addItem } = useCart();
@@ -12,12 +16,12 @@ export default function ItemDetail({ item }) {
   };
 
   return (
-    <div className="detail" style={{ display: "grid", gridTemplateColumns: "320px 1fr", gap: 24 }}>
+    <div className="detail">
       {item.img && (
         <img
-          src={item.img}
+          src={withBase(item.img)}
           alt={item.nombre}
-          style={{ width: "100%", borderRadius: 12 }}
+          className="detail__image"
           loading="lazy"
         />
       )}
@@ -40,10 +44,15 @@ export default function ItemDetail({ item }) {
         {item.descripcion && <p>{item.descripcion}</p>}
 
         <ItemCount
-          stock={99}
+          stock={item.stock ?? 99}
           initial={1}
-          onAdd={(qty) => console.log("Agregar", qty, item.id)}
+          onAdd={handleAdd}
         />
+        {added > 0 && (
+          <p className="cart-confirmation" role="status">
+            Agregaste {added} {added === 1 ? "unidad" : "unidades"}. <Link to="/cart">Ver pedido</Link>
+          </p>
+        )}
       </div>
     </div>
   );

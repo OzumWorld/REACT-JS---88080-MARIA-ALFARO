@@ -1,24 +1,6 @@
 // src/components/ProductCard.jsx
 import { Link } from "react-router-dom";
 import { withBase } from "../lib/paths.js";
-import { useCart } from "../context/CartContext";
-
-export default function ProductCard({ producto, info }) {
-  const { addItem } = useCart();
-  const handleAdd = () => addItem(producto, 1);
-
-  return (
-    <article className="ficha-card">
-      <button
-        type="button"
-        className="btn btn--ghost"
-        onClick={handleAdd}
-      >
-        Agregar al carrito
-      </button>
-    </article>
-  );
-}
 
 export default function ProductCard({ producto, info, onAdd }) {
   const detalleHref = `/productos/item/${encodeURIComponent(producto.id)}`;
@@ -66,11 +48,12 @@ export default function ProductCard({ producto, info, onAdd }) {
           Ver detalle
         </Link>
 
-        <button type="button" className="btn btn--ghost" onClick={() => onAdd(producto.id)}>
-          Agregar al carrito
-        </button>
+        {onAdd && (
+          <button type="button" className="btn btn--ghost" onClick={() => onAdd(producto.id)}>
+            Agregar al carrito
+          </button>
+        )}
       </div>
     </article>
   );
 }
-

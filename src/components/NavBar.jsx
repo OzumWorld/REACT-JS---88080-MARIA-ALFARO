@@ -19,7 +19,7 @@ export default function NavBar() {
 
       <nav className="links">
         {CATS.map(c => (
-          <NavLink key={c.id} to={`/categoria/${c.id}`}>{c.label}</NavLink>
+          <NavLink key={c.id} to={`/productos/categoria/${c.id}`}>{c.label}</NavLink>
         ))}
       </nav>
 
