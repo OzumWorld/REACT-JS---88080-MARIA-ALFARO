@@ -1,71 +1,98 @@
 import { useState } from "react";
+import { Link } from "react-router-dom";
 import { useCart } from "../context/CartContext.jsx";
 import { createOrder } from "../helpers/fetchData.js";
-import { Link } from "react-router-dom";
+import { ACTIVE_PICKUP_POINTS, getPickupPointById } from "../config/pickupPoints.js";
+import { buildWhatsAppUrl } from "../lib/whatsappOrder.js";
 
 export default function Checkout() {
   const { cart, totalPrice, clear } = useCart();
   const [buyer, setBuyer] = useState({ name: "", email: "", phone: "" });
-  const [orderId, setOrderId] = useState("");
+  const [pickupPointId, setPickupPointId] = useState("");
   const [loading, setLoading] = useState(false);
   const [error, setError] = useState("");
 
-  if (orderId) {
-    return (
-      <section className="card">
-        <h2>¡Gracias por tu compra!</h2>
-        <p>Tu ID de orden es:</p>
-        <p className="badge" style={{ fontSize: "1.1rem" }}>{orderId}</p>
-        <Link className="btn" to="/">Volver al inicio</Link>
-      </section>
-    );
-  }
-
   if (!cart.length) {
     return (
-      <section className="card">
-        <p>Carrito vacío.</p>
-        <Link className="btn" to="/">Ir al catálogo</Link>
+      <section className="container card">
+        <p>Tu pedido está vacío.</p>
+        <Link className="btn" to="/productos">Ir al catálogo</Link>
       </section>
     );
   }
 
-  const submit = async (e) => {
-    e.preventDefault();
-    setLoading(true); setError("");
+  const submit = (event) => {
+    event.preventDefault();
+    setLoading(true);
+    setError("");
+
     try {
-      const items = cart.map((p) => ({
-        id: p.id,
-        title: p.nombre || p.title,
-        precio: p.precio,
-        cantidad: p.cantidad,
+      const pickupPoint = getPickupPointById(pickupPointId);
+      if (!pickupPoint) throw new Error("Elegí un punto de retiro habilitado.");
+
+      const items = cart.map((product) => ({
+        id: product.id,
+        title: product.nombre || product.title,
+        precio: product.precio,
+        cantidad: product.cantidad,
       }));
-      const id = await createOrder({ buyer, items, total: totalPrice });
+      const whatsappUrl = buildWhatsAppUrl({ buyer, cart, pickupPoint, total: totalPrice });
+
+      createOrder({
+        buyer,
+        items,
+        total: totalPrice,
+        pickupPoint: {
+          id: pickupPoint.id,
+          label: pickupPoint.label,
+          contactName: pickupPoint.contactName,
+        },
+        channel: "whatsapp",
+      }).catch((orderError) => {
+        console.warn("No se pudo registrar el pedido en Firestore:", orderError);
+      });
+
       clear();
-      setOrderId(id);
-    } catch (err) {
-      setError(err.message);
-    } finally {
+      window.location.assign(whatsappUrl);
+    } catch (submitError) {
+      setError(submitError.message);
       setLoading(false);
     }
   };
 
   return (
-    <section className="card">
-      <h1>Checkout</h1>
-      <form onSubmit={submit} className="row" style={{ flexDirection: "column", gap: ".6rem", maxWidth: 480 }}>
-        <label>Nombre
-          <input required value={buyer.name} onChange={e=>setBuyer(v=>({ ...v, name:e.target.value }))}/>
-        </label>
-        <label>Email
-          <input type="email" required value={buyer.email} onChange={e=>setBuyer(v=>({ ...v, email:e.target.value }))}/>
-        </label>
-        <label>Teléfono
-          <input required value={buyer.phone} onChange={e=>setBuyer(v=>({ ...v, phone:e.target.value }))}/>
-        </label>
-        <button className="btn" disabled={loading}>{loading ? "Procesando…" : "Confirmar compra"}</button>
-        {error && <small className="muted">{error}</small>}
-      </form>
+    <section className="container checkout">
+      <div className="card">
+        <h1>Completá tu pedido</h1>
+        <p>Elegí dónde retirarlo. El punto seleccionado te informará por WhatsApp una fecha posible.</p>
+
+        <form onSubmit={submit} className="checkout__form">
+          <label>Nombre
+            <input autoComplete="name" required value={buyer.name} onChange={(event) => setBuyer((value) => ({ ...value, name: event.target.value }))} />
+          </label>
+          <label>Email
+            <input type="email" autoComplete="email" required value={buyer.email} onChange={(event) => setBuyer((value) => ({ ...value, email: event.target.value }))} />
+          </label>
+          <label>Teléfono
+            <input type="tel" autoComplete="tel" required value={buyer.phone} onChange={(event) => setBuyer((value) => ({ ...value, phone: event.target.value }))} />
+          </label>
+          <label>Punto de retiro
+            <select required value={pickupPointId} onChange={(event) => setPickupPointId(event.target.value)}>
+              <option value="">Seleccioná una opción</option>
+              {ACTIVE_PICKUP_POINTS.map((point) => (
+                <option key={point.id} value={point.id}>{point.label}</option>
+              ))}
+            </select>
+          </label>
+
+          <div className="checkout__summary">
+            <strong>Total estimado</strong>
+            <span>{totalPrice.toLocaleString("es-AR", { style: "currency", currency: "ARS" })}</span>
+          </div>
+          <button className="btn" disabled={loading}>{loading ? "Preparando…" : "Enviar pedido por WhatsApp"}</button>
+          {error && <p className="error" role="alert">{error}</p>}
+        </form>
+      </div>
     </section>
   );
 }

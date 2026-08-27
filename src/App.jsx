@@ -1,5 +1,4 @@
 // src/App.jsx
-import { useEffect } from "react";
 import { Routes, Route } from "react-router-dom";
 
 import NavBar from "./components/NavBar";
@@ -10,24 +9,9 @@ import NotFound from "./components/NotFound";
 import ItemListContainer from "./components/ItemListContainer";
 import ItemDetailContainer from "./components/ItemDetailContainer";
 import Cart from "./components/Cart";
-
-import { db } from "./firebase/config";
-import { collection, getDocs } from "firebase/firestore";
+import Checkout from "./pages/Checkout";
 
 export default function App() {
-  // Test de conexión a Firestore (solo al cargar la app)
-  useEffect(() => {
-    async function testFirestore() {
-      try {
-        const snap = await getDocs(collection(db, "products"));
-        console.log("✅ Conectado a Firestore. Documentos:", snap.size);
-      } catch (err) {
-        console.error("❌ Error al conectar con Firestore:", err);
-      }
-    }
-    testFirestore();
-  }, []);
-
   return (
     <>
       <NavBar />
@@ -41,10 +25,10 @@ export default function App() {
             <Route path="item/:id" element={<ItemDetailContainer />} />
           </Route>
           <Route path="/cart" element={<Cart />} />
+          <Route path="/checkout" element={<Checkout />} />
           <Route path="*" element={<NotFound />} />
         </Routes>
       </main>
     </>
   );
 }
-

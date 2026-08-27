@@ -1,6 +1,8 @@
 import { createContext, useContext, useState, useEffect } from "react";
 
 const CartContext = createContext();
+// El hook comparte este módulo con el provider para conservar la API existente.
+// eslint-disable-next-line react-refresh/only-export-components
 export const useCart = () => useContext(CartContext);
 
 export function CartProvider({ children }) {

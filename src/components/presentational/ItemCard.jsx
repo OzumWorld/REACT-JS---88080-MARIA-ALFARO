@@ -1,5 +1,6 @@
 
 import { Link } from "react-router-dom";
+import { withBase } from "../../lib/paths.js";
 
 export default function ItemCard({ prod }) {
   if (!prod) return null;
@@ -8,9 +9,9 @@ export default function ItemCard({ prod }) {
     <article className="card">
       {prod.img && (
         <img
-          src={prod.img}
+          src={withBase(prod.img)}
           alt={prod.nombre}
-          style={{ width: "100%", height: "auto", borderRadius: 12 }}
+          className="product-card__image"
           loading="lazy"
         />
       )}

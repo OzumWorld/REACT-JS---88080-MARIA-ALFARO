@@ -1,5 +1,6 @@
 import { Link } from "react-router-dom";
 import { useCart } from "../context/CartContext.jsx";
+import { withBase } from "../lib/paths.js";
 
 export default function Cart() {
   const { cart, removeItem, clear, totalUnits, totalPrice } = useCart();
@@ -21,7 +22,7 @@ export default function Cart() {
         {cart.map((p) => (
           <li key={p.id} className="card" style={{ display: "grid", gridTemplateColumns: "80px 1fr auto", gap: "12px", alignItems: "center" }}>
             {p.img ? (
-              <img src={p.img} alt={p.nombre} style={{ width: 80, height: 80, objectFit: "cover", borderRadius: 8 }} />
+              <img src={withBase(p.img)} alt={p.nombre} style={{ width: 80, height: 80, objectFit: "contain", borderRadius: 8 }} />
             ) : (
               <div style={{ width: 80, height: 80, background: "#223", borderRadius: 8 }} />
             )}
@@ -50,7 +51,7 @@ export default function Cart() {
         </div>
         <div style={{ display: "flex", gap: 8 }}>
           <button className="btn btn--ghost" onClick={clear}>Vaciar carrito</button>
-          <Link className="btn" to="/checkout">Ir a pagar</Link>
+          <Link className="btn" to="/checkout">Elegir retiro y enviar</Link>
         </div>
       </div>
     </section>

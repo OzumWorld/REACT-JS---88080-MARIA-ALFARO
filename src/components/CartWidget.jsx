@@ -1,15 +1,15 @@
 import { useCart } from "../context/CartContext.jsx";
+import { Link } from "react-router-dom";
 
 export default function CartWidget() {
   const { totalUnits } = useCart(); // viene del Context
 
   return (
-    <div className="nav__cart" style={{ display: "flex", alignItems: "center", gap: 8 }}>
+    <Link to="/cart" className="nav__cart" aria-label={`Carrito con ${totalUnits} unidades`}>
       <span role="img" aria-label="Carrito">🛒</span>
       <span className="badge">{totalUnits}</span>
-    </div>
+    </Link>
   );
 }
-
 
 
