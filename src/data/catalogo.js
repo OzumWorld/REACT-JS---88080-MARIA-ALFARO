@@ -1,5 +1,7 @@
 
 import { getProductDocumentPath } from "../config/productDocuments.js";
+import { getPendingProductDocument } from "../config/productDocuments.js";
+import { BARBOTINA_CANJE_CONDITION } from "../config/commercialConditions.js";
 
 export const CATALOGO = [
     { id: "pasta-lisa-blanca", nombre: "Pasta Lisa Blanca (bolsa 10 kg)", tipo: "pasta",
@@ -13,9 +15,11 @@ export const CATALOGO = [
     { id: "pasta-roja-fuego-directo", nombre: "Pasta Roja Fuego Directo (bolsa 5 kg)", tipo: "pasta",
       precios:{ unidad:10000, pack10:9500, pack20:9000 } },
     { id: "pasta-gres-tostado-claro", nombre: "Pasta Gres Tostado Claro (bolsa 5 kg)", tipo: "pasta",
-      precios:{ unidad:10000, pack10:9500, pack20:9000 } },
+      precios:{ unidad:13500, pack10:13000, pack20:12500 } },
     { id: "pasta-gres-tostado-oscura", nombre: "Pasta Gres Tostado Oscura (bolsa 5 kg)", tipo: "pasta",
-      precios:{ unidad:10000, pack10:9500, pack20:9000 } },
+      precios:{ unidad:13500, pack10:13000, pack20:12500 } },
+    { id: "pasta-gres-blanco", nombre: "Pasta Gres Blanco (bolsa 5 kg)", tipo: "pasta",
+      precios:{ unidad:13500, pack10:13000, pack20:12500 } },
 
     { id: "barbotina", nombre: "Barbotina bidón 9 kg", tipo: "barbotina", precios:{unidad:12000, pack10:10000, pack20:10000} },
     { id: "barbotina-canje", nombre: "Barbotina Canje bidón 9 kg", tipo: "barbotina", precios:{unidad:9500, pack10:8500, pack20:8500} },
@@ -65,23 +69,35 @@ export const CATALOGO = [
       pdf: getProductDocumentPath("pasta-gres-tostado-oscura"),
       img: "/img/Pasta Gres Tostado Oscuro.jpg"
     },
+    "pasta-gres-blanco": {
+      resumen: "Pasta Gres Blanco en presentación de 5 kg.",
+      coccion: null,
+      pdf: null,
+      pendingDocument: getPendingProductDocument("pasta-gres-blanco"),
+      img: null,
+      pendingImage: "/img/RARKNAgWgJnNhlVqoSlc8sw5EAPB4u5zyoVdwGA4-2.jpg"
+    },
     "barbotina": {
       resumen: "Lista para colada. Agitar antes de usar.",
       coccion: "Según pasta final",
       pdf: getProductDocumentPath("barbotina"),
-      img: "/img/Barbotina bidon 9 kg.jpg"
+      img: "/img/Barbotina bidon 9 kg.jpg",
+      confirmedImage: "/img/Q543gzgDz8YSZG2YsSJQFqGQLwPwKZtkiygGL0FB.jpg"
     },
     "barbotina-canje": {
       resumen: "Barbotina Canje en presentación de 9 kg.",
       coccion: "Dato técnico pendiente de confirmación",
+      commercialCondition: BARBOTINA_CANJE_CONDITION,
       pdf: null,
-      img: "/img/Barbotina bidon 9 kg.jpg"
+      img: "/img/Barbotina bidon 9 kg.jpg",
+      confirmedImage: "/img/Q543gzgDz8YSZG2YsSJQFqGQLwPwKZtkiygGL0FB.jpg"
     },
     "barbotina-gres-tostado-oscuro": {
       resumen: "Colada para gres. Curva de alta.",
       coccion: "1240–1250 °C",
       pdf: getProductDocumentPath("barbotina-gres-tostado-oscuro"),
-      img: "/img/Barbotina para Gres bidon 9 kg.jpg"
+      img: null,
+      pendingImage: "/img/qIMurfX4CeA3F0Pufc2FYYVMnBs0DkUMho65yZpG.jpg"
     }
   };
 

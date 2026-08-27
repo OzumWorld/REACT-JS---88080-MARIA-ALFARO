@@ -22,11 +22,16 @@ const localProducts = CATALOGO.map((product) => {
     id: product.id,
     nombre: product.nombre,
     precio: product.precios.unidad,
+    precios: product.precios,
     categoria: product.tipo === "pasta" ? "pastas" : "barbotinas",
     descripcion: info.resumen,
     coccion: info.coccion,
     img: info.img,
     pdf: info.pdf,
+    commercialCondition: info.commercialCondition,
+    pendingDocument: info.pendingDocument,
+    pendingImage: info.pendingImage,
+    confirmedImage: info.confirmedImage,
     stock: 99,
   };
 });
@@ -36,7 +41,7 @@ const getLocalProducts = (catId) =>
 
 const enrichProduct = (product) => {
   const localProduct = localProducts.find((local) => local.id === product.id);
-  return localProduct ? { ...localProduct, ...product, img: product.img || localProduct.img, pdf: product.pdf || localProduct.pdf, coccion: product.coccion || localProduct.coccion, descripcion: product.descripcion || localProduct.descripcion } : product;
+  return localProduct ? { ...localProduct, ...product, img: product.img || localProduct.img, pdf: product.pdf || localProduct.pdf, coccion: product.coccion || localProduct.coccion, descripcion: product.descripcion || localProduct.descripcion, precios: localProduct.precios, commercialCondition: localProduct.commercialCondition, pendingDocument: localProduct.pendingDocument, pendingImage: localProduct.pendingImage, confirmedImage: localProduct.confirmedImage } : product;
 };
 
 /**

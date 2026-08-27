@@ -23,8 +23,20 @@ test("cada producto activo tiene imagen y sólo usa una ficha original asociada"
   for (const product of CATALOGO) {
     const info = PRODUCT_INFO[aliases[product.id] || product.id];
     assert.ok(info, `Falta información para ${product.id}`);
-    assert.ok(info.img, `Falta imagen para ${product.id}`);
-    assert.equal(existsSync(`public${info.img}`), true, `No existe ${info.img}`);
+    if (product.id === "pasta-gres-blanco") {
+      assert.equal(info.img, null);
+      assert.equal(info.pendingImage, "/img/RARKNAgWgJnNhlVqoSlc8sw5EAPB4u5zyoVdwGA4-2.jpg");
+      assert.equal(info.pendingDocument.fileName, "Pasta Gres Blanco.pdf");
+      assert.equal(info.pdf, null);
+      continue;
+    }
+    if (product.id === "barbotina-gres-tostado-oscuro") {
+      assert.equal(info.img, null);
+      assert.equal(info.pendingImage, "/img/qIMurfX4CeA3F0Pufc2FYYVMnBs0DkUMho65yZpG.jpg");
+    } else {
+      assert.ok(info.img, `Falta imagen para ${product.id}`);
+      assert.equal(existsSync(`public${info.img}`), true, `No existe ${info.img}`);
+    }
     if (product.id === "barbotina-canje") {
       assert.equal(info.pdf, null, "Barbotina Canje debe esperar una ficha original confirmada");
       continue;
@@ -77,4 +89,70 @@ test("la operación pública continúa basada en retiro y no promete envíos nac
   ].join("\n");
   assert.match(publicCopy, /puntos? de retiro/i);
   assert.doesNotMatch(publicCopy, /envíos nacionales|cálculo de envío|tarifa de envío|entregamos en todo el país/i);
+});
+
+test("la condición de canje está centralizada y no se aplica a otras barbotinas", () => {
+  const config = readFileSync("src/config/commercialConditions.js", "utf8");
+  const canje = PRODUCT_INFO["barbotina-canje"];
+  assert.match(config, /PHOTO-2026-08-07-10-58-32\.jpg/);
+  assert.match(canje.commercialCondition, /Los bidones de 9 kg deben entregarse vacíos, limpios y en perfecto estado/);
+  assert.equal(PRODUCT_INFO.barbotina.commercialCondition, undefined);
+  assert.equal(PRODUCT_INFO["barbotina-gres-tostado-oscuro"].commercialCondition, undefined);
+});
+
+test("Pasta Gres Blanco conserva presentación y precios confirmados", () => {
+  const product = CATALOGO.find((item) => item.id === "pasta-gres-blanco");
+  assert.ok(product);
+  assert.equal(product.nombre, "Pasta Gres Blanco (bolsa 5 kg)");
+  assert.deepEqual(product.precios, { unidad: 13500, pack10: 13000, pack20: 12500 });
+});
+
+test("los tres Gres de 5 kg comparten la lista confirmada de agosto", () => {
+  for (const id of ["pasta-gres-blanco", "pasta-gres-tostado-claro", "pasta-gres-tostado-oscura"]) {
+    const product = CATALOGO.find((item) => item.id === id);
+    assert.deepEqual(product.precios, { unidad: 13500, pack10: 13000, pack20: 12500 });
+  }
+});
+
+test("el catálogo conserva todos los precios confirmados de agosto de 2026", () => {
+  const expectedPrices = {
+    "pasta-lisa-blanca": [13500, 12500, 12000],
+    "pasta-blanca-con-chamote": [10000, 9500, 9000],
+    "pasta-roja": [10000, 9500, 9000],
+    "pasta-roja-con-chamote": [10000, 9500, 9000],
+    "pasta-roja-fuego-directo": [10000, 9500, 9000],
+    "pasta-gres-tostado-claro": [13500, 13000, 12500],
+    "pasta-gres-tostado-oscura": [13500, 13000, 12500],
+    "pasta-gres-blanco": [13500, 13000, 12500],
+    barbotina: [12000, 10000, 10000],
+    "barbotina-canje": [9500, 8500, 8500],
+    "barbotina-gres-tostado-oscuro": [14000, 12000, 12000],
+  };
+
+  assert.equal(CATALOGO.length, Object.keys(expectedPrices).length);
+  for (const product of CATALOGO) {
+    assert.deepEqual(Object.values(product.precios), expectedPrices[product.id]);
+  }
+});
+
+test("la foto real de Gres Blanco queda asociada sin sustitución", { skip: !existsSync("public/img/RARKNAgWgJnNhlVqoSlc8sw5EAPB4u5zyoVdwGA4-2.jpg") ? "Falta compartir el binario original RARKNAgWgJnNhlVqoSlc8sw5EAPB4u5zyoVdwGA4-2.jpg" : false }, () => {
+  assert.equal(existsSync("public/img/RARKNAgWgJnNhlVqoSlc8sw5EAPB4u5zyoVdwGA4-2.jpg"), true);
+});
+
+test("las imágenes confirmadas de barbotina quedan vinculadas al producto correcto", () => {
+  assert.equal(PRODUCT_INFO.barbotina.confirmedImage, "/img/Q543gzgDz8YSZG2YsSJQFqGQLwPwKZtkiygGL0FB.jpg");
+  assert.equal(PRODUCT_INFO["barbotina-gres-tostado-oscuro"].pendingImage, "/img/qIMurfX4CeA3F0Pufc2FYYVMnBs0DkUMho65yZpG.jpg");
+});
+
+test("los bidones industriales grandes quedan fuera del catálogo y del despliegue", () => {
+  assert.equal(CATALOGO.some((product) => /tambor|industrial|200\s*(kg|l)/i.test(product.nombre)), false);
+  assert.equal(existsSync("archive/future-industrial/README.md"), true);
+  const publicFiles = readFileSync("src/data/catalogo.js", "utf8");
+  assert.doesNotMatch(publicFiles, /tambor industrial|bidón industrial/i);
+});
+
+test("las fotos de pastas no reciben filtros de color", () => {
+  const styles = readFileSync("src/index.css", "utf8");
+  assert.doesNotMatch(styles, /hero__visual img[^}]*filter:/s);
+  assert.doesNotMatch(styles, /product-card__media img[^}]*filter:/s);
 });

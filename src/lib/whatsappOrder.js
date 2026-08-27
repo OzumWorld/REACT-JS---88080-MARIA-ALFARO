@@ -1,3 +1,5 @@
+import { BARBOTINA_CANJE_CONDITION, cartIncludesBarbotinaCanje } from "../config/commercialConditions.js";
+
 const formatMoney = (value) =>
   Number(value).toLocaleString("es-AR", {
     style: "currency",
@@ -19,12 +21,16 @@ export function buildWhatsAppMessage({ buyer, cart, pickupPoint, total }) {
     const unitPrice = Number(item.precio) || 0;
     return `• ${quantity} × ${name} — ${formatMoney(quantity * unitPrice)}`;
   });
+  const exchangeCondition = cartIncludesBarbotinaCanje(cart)
+    ? `Condición de Barbotina Canje: ${BARBOTINA_CANJE_CONDITION}`
+    : null;
 
   return [
     `Hola ${pickupPoint.contactName}, soy ${buyer.name}.`,
     "Quiero hacer este pedido de Arcillas Argentinas:",
     "",
     ...items,
+    exchangeCondition,
     "",
     `Total estimado: ${formatMoney(total)}`,
     `Punto de retiro: ${pickupPoint.label}`,

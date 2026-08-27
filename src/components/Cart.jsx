@@ -40,6 +40,7 @@ export default function Cart() {
               <div className="cart-item__subtotal">
                 Subtotal: {(p.cantidad * p.precio).toLocaleString("es-AR", { style: "currency", currency: "ARS" })}
               </div>
+              {p.commercialCondition && <div className="cart-item__condition">{p.commercialCondition}</div>}
             </div>
 
             <button className="text-button" onClick={() => removeItem(p.id)}>Quitar</button>

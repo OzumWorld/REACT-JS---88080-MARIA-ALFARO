@@ -13,10 +13,31 @@ export const PRODUCT_DOCUMENTS = Object.freeze([
   { productId: "pasta-roja", productName: "Pasta Roja", fileName: "Pasta Roja.pdf" },
 ].map((document) => Object.freeze({ ...document, path: `${FICHAS_BASE}${document.fileName}` })));
 
+export const PENDING_PRODUCT_DOCUMENTS = Object.freeze([
+  Object.freeze({
+    productId: "pasta-gres-blanco",
+    productName: "Pasta Gres Blanco",
+    fileName: "Pasta Gres Blanco.pdf",
+    status: "preparation",
+    pendingFields: Object.freeze([
+      "Composición",
+      "Absorción",
+      "Temperatura de cocción",
+      "Cono",
+      "Compatibilidad de esmaltes",
+      "Usos técnicos",
+    ]),
+  }),
+]);
+
 export function getProductDocument(productId) {
   return PRODUCT_DOCUMENTS.find((document) => document.productId === productId) ?? null;
 }
 
 export function getProductDocumentPath(productId) {
   return getProductDocument(productId)?.path ?? null;
+}
+
+export function getPendingProductDocument(productId) {
+  return PENDING_PRODUCT_DOCUMENTS.find((document) => document.productId === productId) ?? null;
 }

@@ -4,6 +4,7 @@ import { useCart } from "../context/CartContext.jsx";
 import { createOrder } from "../helpers/fetchData.js";
 import { ACTIVE_PICKUP_POINTS, getPickupPointById } from "../config/pickupPoints.js";
 import { buildWhatsAppUrl } from "../lib/whatsappOrder.js";
+import { BARBOTINA_CANJE_CONDITION, cartIncludesBarbotinaCanje } from "../config/commercialConditions.js";
 
 export default function Checkout() {
   const { cart, totalPrice, clear } = useCart();
@@ -11,6 +12,7 @@ export default function Checkout() {
   const [pickupPointId, setPickupPointId] = useState("");
   const [loading, setLoading] = useState(false);
   const [error, setError] = useState("");
+  const includesBarbotinaCanje = cartIncludesBarbotinaCanje(cart);
 
   if (!cart.length) {
     return (
@@ -35,6 +37,7 @@ export default function Checkout() {
         title: product.nombre || product.title,
         precio: product.precio,
         cantidad: product.cantidad,
+        commercialCondition: product.commercialCondition,
       }));
       const whatsappUrl = buildWhatsAppUrl({ buyer, cart, pickupPoint, total: totalPrice });
 
@@ -85,6 +88,13 @@ export default function Checkout() {
               ))}
             </select>
           </label>
+
+          {includesBarbotinaCanje && (
+            <aside className="commercial-condition checkout__condition" aria-label="Condición de Barbotina Canje">
+              <strong>Tu pedido incluye Barbotina Canje</strong>
+              <span>{BARBOTINA_CANJE_CONDITION}</span>
+            </aside>
+          )}
 
           <div className="checkout__summary">
             <strong>Total estimado</strong>
