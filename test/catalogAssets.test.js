@@ -140,6 +140,11 @@ test("Pasta Raku usa la última imagen confirmada por la distribuidora", () => {
   assert.equal(existsSync("public/img/lFQej9H0B67Y18F6s7Ney1i5emJP9rtceXqgTMHU.jpg"), true);
 });
 
+test("Gres Tostado Claro usa la última imagen confirmada", () => {
+  assert.equal(PRODUCT_INFO["pasta-gres-tostado-claro"].img, "/img/KAnQ3tOUwH2DUS3hPozWPyO9BkBcuJvzWpkmGz0k.jpg");
+  assert.equal(existsSync("public/img/KAnQ3tOUwH2DUS3hPozWPyO9BkBcuJvzWpkmGz0k.jpg"), true);
+});
+
 test("las imágenes confirmadas de barbotina quedan vinculadas al producto correcto", () => {
   assert.equal(PRODUCT_INFO.barbotina.img, "/img/Q543gzgDz8YSZG2YsSJQFqGQLwPwKZtkiygGL0FB.jpg");
   assert.equal(PRODUCT_INFO["barbotina-gres-tostado-oscuro"].img, "/img/qIMurfX4CeA3F0Pufc2FYYVMnBs0DkUMho65yZpG.jpg");

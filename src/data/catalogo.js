@@ -63,7 +63,7 @@ export const CATALOGO = [
       resumen: "Alta resistencia para utilitario. Cone 6–7.",
       coccion: "1240–1250 °C",
       pdf: getProductDocumentPath("pasta-gres-tostado-claro"),
-      img: "/img/Pasta Gres Tostado Claro.jpg"
+      img: "/img/KAnQ3tOUwH2DUS3hPozWPyO9BkBcuJvzWpkmGz0k.jpg"
     },
     "pasta-gres-tostado-oscuro": {
       resumen: "Base cálida para esmaltes de alta.",
