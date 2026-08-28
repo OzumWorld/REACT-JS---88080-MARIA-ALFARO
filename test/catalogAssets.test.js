@@ -35,11 +35,13 @@ test("cada producto activo tiene imagen y sólo usa una ficha original asociada"
   }
 });
 
-test("GitHub Pages incluye recuperación de rutas internas", () => {
+test("el dominio propio incluye recuperación de rutas internas", () => {
   const fallback = readFileSync("public/404.html", "utf8");
   const index = readFileSync("index.html", "utf8");
-  assert.match(fallback, /segmentsToKeep = 1/);
+  const vite = readFileSync("vite.config.js", "utf8");
+  assert.match(fallback, /segmentsToKeep = 0/);
   assert.match(index, /location\.search\.startsWith\("\?\/"\)/);
+  assert.match(vite, /base: '\/'/);
 });
 
 test("la identidad del documento ya no usa Vite", () => {
@@ -77,6 +79,16 @@ test("la operación pública continúa basada en retiro y no promete envíos nac
   ].join("\n");
   assert.match(publicCopy, /puntos? de retiro/i);
   assert.doesNotMatch(publicCopy, /envíos nacionales|cálculo de envío|tarifa de envío|entregamos en todo el país/i);
+});
+
+test("el carrito solicita el punto de retiro antes de continuar", () => {
+  const cart = readFileSync("src/components/Cart.jsx", "utf8");
+  const checkout = readFileSync("src/pages/Checkout.jsx", "utf8");
+  assert.match(cart, /ACTIVE_PICKUP_POINTS/);
+  assert.match(cart, /Punto de retiro/);
+  assert.match(cart, /Elegí dónde retirar/);
+  assert.match(cart, /disabled=\{!pickupPointId\}/);
+  assert.match(checkout, /location\.state\?\.pickupPointId/);
 });
 
 test("la condición de canje está centralizada y no se aplica a otras barbotinas", () => {
