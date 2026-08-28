@@ -27,7 +27,7 @@ export default function ItemCard({ prod }) {
         <div className="product-card__actions">
           {prod.stock === 0 ? <p className="stock-status">Sin stock</p> : <Link to={`/productos/item/${prod.id}`} className="btn btn--ink">Ver detalle</Link>}
           {prod.pdf && <a className="icon-link" href={withBase(prod.pdf)} download aria-label={`Descargar ficha técnica de ${prod.nombre}`}>PDF <span aria-hidden="true">↓</span></a>}
-          {prod.pendingDocument && <span className="document-pending">Ficha técnica en preparación</span>}
+          {prod.pendingDocument && <span className="document-pending">Ficha técnica preliminar</span>}
         </div>
       </div>
     </article>

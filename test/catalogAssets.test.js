@@ -27,7 +27,9 @@ test("cada producto activo tiene imagen y sólo usa una ficha original asociada"
       assert.equal(info.img, "/img/RARKNAgWgJnNhlVqoSlc8sw5EAPB4u5zyoVdwGA4-2.jpg");
       assert.equal(existsSync(`public${info.img}`), true, `No existe ${info.img}`);
       assert.equal(info.pendingDocument.fileName, "Pasta Gres Blanco.pdf");
-      assert.equal(info.pdf, null);
+      assert.equal(info.pendingDocument.status, "preliminary");
+      assert.equal(info.pdf, "/fichas/Pasta Gres Blanco.pdf");
+      assert.equal(existsSync(`public${info.pdf}`), true, `No existe ${info.pdf}`);
       continue;
     }
     assert.ok(info.img, `Falta imagen para ${product.id}`);

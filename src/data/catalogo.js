@@ -74,7 +74,7 @@ export const CATALOGO = [
     "pasta-gres-blanco": {
       resumen: "Pasta Gres Blanco en presentación de 5 kg.",
       coccion: null,
-      pdf: null,
+      pdf: getPendingProductDocument("pasta-gres-blanco").path,
       pendingDocument: getPendingProductDocument("pasta-gres-blanco"),
       img: "/img/RARKNAgWgJnNhlVqoSlc8sw5EAPB4u5zyoVdwGA4-2.jpg"
     },

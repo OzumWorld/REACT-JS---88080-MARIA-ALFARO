@@ -18,7 +18,8 @@ export const PENDING_PRODUCT_DOCUMENTS = Object.freeze([
     productId: "pasta-gres-blanco",
     productName: "Pasta Gres Blanco",
     fileName: "Pasta Gres Blanco.pdf",
-    status: "preparation",
+    path: `${FICHAS_BASE}Pasta Gres Blanco.pdf`,
+    status: "preliminary",
     pendingFields: Object.freeze([
       "Composición",
       "Absorción",

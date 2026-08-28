@@ -45,9 +45,9 @@ export default function ItemDetail({ item }) {
         )}
         {item.pdf && <a className="pdf-download" href={withBase(item.pdf)} download><span aria-hidden="true">PDF</span><span><strong>Descargar ficha técnica</strong><small>Documento en formato PDF</small></span><span aria-hidden="true">↓</span></a>}
         {item.pendingDocument && (
-          <aside className="pending-sheet" aria-label="Ficha técnica en preparación">
-            <strong>Ficha técnica en preparación</strong>
-            <span>No se publicarán datos técnicos hasta contar con información confirmada.</span>
+          <aside className="pending-sheet" aria-label="Ficha técnica preliminar">
+            <strong>Ficha técnica preliminar</strong>
+            <span>El PDF identifica el producto y señala expresamente los datos que todavía requieren confirmación.</span>
             <small>Campos pendientes: {item.pendingDocument.pendingFields.join(", ")}.</small>
           </aside>
         )}
