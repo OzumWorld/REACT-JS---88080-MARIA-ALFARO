@@ -59,14 +59,14 @@ export const CATALOGO = [
       img: "/img/ARtb8X5sKj6eKZybZTsHWJmI9bgEF4vAPe2pspEj.jpg"
     },
     "pasta-gres-tostado-claro": {
-      resumen: "Alta resistencia para utilitario. Cone 6–7.",
-      coccion: "1240–1250 °C",
+      resumen: "Alta resistencia para utilitario. Cono 5 1/2.",
+      coccion: "1225-1230 °C (cono 5 1/2)",
       pdf: getProductDocumentPath("pasta-gres-tostado-claro"),
       img: "/img/KAnQ3tOUwH2DUS3hPozWPyO9BkBcuJvzWpkmGz0k.jpg"
     },
     "pasta-gres-tostado-oscuro": {
       resumen: "Base cálida para esmaltes de alta.",
-      coccion: "1240–1250 °C",
+      coccion: "1225-1230 °C (cono 5 1/2)",
       pdf: getProductDocumentPath("pasta-gres-tostado-oscura"),
       img: "/img/AtYHdHjt1DDQ8KJ11lafBVuxOYtO01KdbmBhkqJP.jpg"
     },
@@ -77,8 +77,8 @@ export const CATALOGO = [
       img: "/img/RARKNAgWgJnNhlVqoSlc8sw5EAPB4u5zyoVdwGA4-2.jpg"
     },
     "pasta-raku": {
-      resumen: "Pasta para técnicas de Raku en presentación de 5 kg.",
-      coccion: "Consultar ficha técnica",
+      resumen: "Pasta para técnicas de Raku en presentación de 5 kg. Temperatura 1300 °C.",
+      coccion: "1300 °C",
       pdf: getProductDocumentPath("pasta-raku"),
       img: "/img/lFQej9H0B67Y18F6s7Ney1i5emJP9rtceXqgTMHU.jpg"
     },
