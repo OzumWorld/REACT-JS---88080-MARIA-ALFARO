@@ -161,6 +161,12 @@ test("las seis pastas restantes usan las últimas imágenes confirmadas", () => 
   }
 });
 
+test("el inicio usa la nueva fotografía de Pasta Lisa Blanca", () => {
+  const home = readFileSync("src/pages/Home.jsx", "utf8");
+  assert.match(home, /Ry0cc3fxkSio5IBTbbtfdKJsdfFi5gvFbgYRmJVz\.jpg/);
+  assert.doesNotMatch(home, /\/img\/Pasta Lisa Blanca\.jpg/);
+});
+
 test("las imágenes confirmadas de barbotina quedan vinculadas al producto correcto", () => {
   assert.equal(PRODUCT_INFO.barbotina.img, "/img/Q543gzgDz8YSZG2YsSJQFqGQLwPwKZtkiygGL0FB.jpg");
   assert.equal(PRODUCT_INFO["barbotina-gres-tostado-oscuro"].img, "/img/qIMurfX4CeA3F0Pufc2FYYVMnBs0DkUMho65yZpG.jpg");

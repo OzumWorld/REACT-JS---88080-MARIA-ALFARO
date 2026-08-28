@@ -18,7 +18,7 @@ export default function Home() {
             </div>
           </div>
           <div className="hero__visual" aria-hidden="true">
-            <img src={withBase("/img/Pasta Lisa Blanca.jpg")} alt="" />
+            <img src={withBase("/img/Ry0cc3fxkSio5IBTbbtfdKJsdfFi5gvFbgYRmJVz.jpg")} alt="" />
             <div className="hero__stamp"><span>Arcillas</span><strong>Chilavert</strong></div>
           </div>
         </div>
