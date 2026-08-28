@@ -71,7 +71,7 @@ export const CATALOGO = [
       img: "/img/AtYHdHjt1DDQ8KJ11lafBVuxOYtO01KdbmBhkqJP.jpg"
     },
     "pasta-gres-blanco": {
-      resumen: "Gres blanco para cono 5 1/2. Contracción 12% y absorción 2,33%.",
+      resumen: "Gres blanco para cono 5 1/2. Contracción 12%, absorción 2,33% y compatibilidad confirmada con esmaltes DpColors.",
       coccion: "1225-1230 °C (cono 5 1/2)",
       pdf: getProductDocumentPath("pasta-gres-blanco"),
       img: "/img/RARKNAgWgJnNhlVqoSlc8sw5EAPB4u5zyoVdwGA4-2.jpg"

@@ -100,6 +100,7 @@ test("Pasta Gres Blanco publica los datos técnicos confirmados", () => {
   assert.equal(info.coccion, "1225-1230 °C (cono 5 1/2)");
   assert.match(info.resumen, /Contracción 12%/);
   assert.match(info.resumen, /absorción 2,33%/);
+  assert.match(info.resumen, /compatibilidad confirmada con esmaltes DpColors/);
   assert.equal(info.pdf, "/fichas/Pasta Gres Blanco.pdf");
   assert.equal(info.pendingDocument, undefined);
 });
