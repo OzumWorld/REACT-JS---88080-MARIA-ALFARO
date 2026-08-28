@@ -111,6 +111,13 @@ test("Pasta Gres Blanco publica los datos técnicos confirmados", () => {
   assert.equal(info.pendingDocument, undefined);
 });
 
+test("las pastas Gres y Raku publican las temperaturas confirmadas", () => {
+  for (const id of ["pasta-gres-blanco", "pasta-gres-tostado-claro", "pasta-gres-tostado-oscuro"]) {
+    assert.equal(PRODUCT_INFO[id].coccion, "1225-1230 °C (cono 5 1/2)");
+  }
+  assert.equal(PRODUCT_INFO["pasta-raku"].coccion, "1300 °C");
+});
+
 test("los tres Gres de 5 kg comparten la lista confirmada de agosto", () => {
   for (const id of ["pasta-gres-blanco", "pasta-gres-tostado-claro", "pasta-gres-tostado-oscura"]) {
     const product = CATALOGO.find((item) => item.id === id);
