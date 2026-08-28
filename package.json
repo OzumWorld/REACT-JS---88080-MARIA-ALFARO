@@ -8,7 +8,8 @@
     "build": "vite build",
     "lint": "eslint .",
     "preview": "vite preview",
-    "test": "node --test"
+    "test": "node --test",
+    "import:fichas": "bash scripts/import_original_fichas.sh"
   },
   "dependencies": {
     "react": "^19.1.1",

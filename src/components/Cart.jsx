@@ -7,51 +7,57 @@ export default function Cart() {
 
   if (!cart.length) {
     return (
-      <section className="container card">
-        <h2>Tu carrito está vacío</h2>
-        <Link className="btn" to="/">Ir al catálogo</Link>
+      <section className="section container empty-state">
+        <p className="eyebrow eyebrow--dark">Tu pedido</p>
+        <h1>El carrito está vacío.</h1>
+        <p>Recorré el catálogo y agregá los materiales que necesitás.</p>
+        <Link className="btn btn--ink" to="/productos">Ir al catálogo</Link>
       </section>
     );
   }
 
   return (
-    <section className="container">
-      <h1>Carrito</h1>
+    <section className="section container cart-page">
+      <header className="page-heading page-heading--compact">
+        <p className="eyebrow eyebrow--dark">Tu pedido</p>
+        <h1>Carrito</h1>
+      </header>
 
-      <ul className="list" style={{ listStyle: "none", padding: 0, margin: "1rem 0" }}>
+      <ul className="cart-list">
         {cart.map((p) => (
-          <li key={p.id} className="card" style={{ display: "grid", gridTemplateColumns: "80px 1fr auto", gap: "12px", alignItems: "center" }}>
+          <li key={p.id} className="cart-item">
             {p.img ? (
-              <img src={withBase(p.img)} alt={p.nombre} style={{ width: 80, height: 80, objectFit: "contain", borderRadius: 8 }} />
+              <img src={withBase(p.img)} alt={p.nombre} />
             ) : (
-              <div style={{ width: 80, height: 80, background: "#223", borderRadius: 8 }} />
+              <div className="cart-item__placeholder" />
             )}
 
             <div>
               <strong>{p.nombre}</strong>
-              <div style={{ opacity: 0.8, fontSize: 14 }}>
+              <div className="cart-item__meta">
                 {p.cantidad} x {p.precio.toLocaleString("es-AR", { style: "currency", currency: "ARS" })}
               </div>
-              <div style={{ fontWeight: 700 }}>
+              <div className="cart-item__subtotal">
                 Subtotal: {(p.cantidad * p.precio).toLocaleString("es-AR", { style: "currency", currency: "ARS" })}
               </div>
+              {p.commercialCondition && <div className="cart-item__condition">{p.commercialCondition}</div>}
             </div>
 
-            <button className="btn btn--ghost" onClick={() => removeItem(p.id)}>Quitar</button>
+            <button className="text-button" onClick={() => removeItem(p.id)}>Quitar</button>
           </li>
         ))}
       </ul>
 
-      <div className="card" style={{ display: "flex", justifyContent: "space-between", alignItems: "center", gap: 12 }}>
+      <div className="cart-summary">
         <div>
           <div><strong>Unidades:</strong> {totalUnits}</div>
-          <div style={{ fontSize: 18 }}>
+          <div className="cart-summary__total">
             <strong>Total:</strong> {totalPrice.toLocaleString("es-AR", { style: "currency", currency: "ARS" })}
           </div>
         </div>
-        <div style={{ display: "flex", gap: 8 }}>
-          <button className="btn btn--ghost" onClick={clear}>Vaciar carrito</button>
-          <Link className="btn" to="/checkout">Elegir retiro y enviar</Link>
+        <div className="button-row">
+          <button className="btn btn--outline" onClick={clear}>Vaciar carrito</button>
+          <Link className="btn btn--clay" to="/checkout">Elegir retiro y enviar</Link>
         </div>
       </div>
     </section>

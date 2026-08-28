@@ -16,44 +16,48 @@ export default function ItemDetail({ item }) {
   };
 
   return (
-    <div className="detail">
-      {item.img && (
-        <img
-          src={withBase(item.img)}
-          alt={item.nombre}
-          className="detail__image"
-          loading="lazy"
-        />
-      )}
-
-      <div>
-        <h2>{item.nombre}</h2>
-
-        {item.categoria && (
-          <p style={{ opacity: 0.85 }}>
-            <strong>Categoría:</strong> {item.categoria}
-          </p>
+    <article className="detail">
+      <div className="detail__media">
+        {item.img ? <img src={withBase(item.img)} alt={item.nombre} loading="eager" /> : <div className="detail__image-pending">Foto real pendiente de incorporación</div>}
+      </div>
+      <div className="detail__content">
+        <Link className="back-link" to="/productos">← Volver al catálogo</Link>
+        <p className="eyebrow eyebrow--dark">{item.categoria === "pastas" ? "Pasta cerámica" : "Barbotina"}</p>
+        <h1>{item.nombre}</h1>
+        {item.descripcion && <p className="detail__lead">{item.descripcion}</p>}
+        {item.commercialCondition && (
+          <aside className="commercial-condition" aria-label="Condición de canje">
+            <strong>Condición de canje</strong>
+            <span>{item.commercialCondition}</span>
+          </aside>
         )}
-
-        {typeof item.precio !== "undefined" && (
-          <p style={{ fontWeight: 700, fontSize: 18, margin: "8px 0 16px" }}>
-            {item.precio.toLocaleString("es-AR", { style: "currency", currency: "ARS" })}
-          </p>
+        <dl className="technical-summary">
+          {item.coccion && <div><dt>Rango de cocción disponible</dt><dd>{item.coccion}</dd></div>}
+          <div><dt>Presentación</dt><dd>{item.nombre.match(/\(([^)]+)\)|(?:bidón|bolsa) [0-9]+ kg/i)?.[1] || item.nombre.match(/(?:bidón|bolsa) [0-9]+ kg/i)?.[0] || "Consultar"}</dd></div>
+        </dl>
+        {typeof item.precio !== "undefined" && <p className="price price--large">{item.precio.toLocaleString("es-AR", { style: "currency", currency: "ARS", maximumFractionDigits: 0 })}</p>}
+        {item.precios && (
+          <dl className="price-tiers" aria-label="Precios por cantidad">
+            <div><dt>1 a 9 unidades</dt><dd>{item.precios.unidad.toLocaleString("es-AR", { style: "currency", currency: "ARS", maximumFractionDigits: 0 })} c/u</dd></div>
+            <div><dt>Desde 10 unidades</dt><dd>{item.precios.pack10.toLocaleString("es-AR", { style: "currency", currency: "ARS", maximumFractionDigits: 0 })} c/u</dd></div>
+            {Number.isFinite(item.precios.pack20) && <div><dt>Desde 20 unidades</dt><dd>{item.precios.pack20.toLocaleString("es-AR", { style: "currency", currency: "ARS", maximumFractionDigits: 0 })} c/u</dd></div>}
+          </dl>
         )}
-
-        {item.descripcion && <p>{item.descripcion}</p>}
-
-        <ItemCount
-          stock={item.stock ?? 99}
-          initial={1}
-          onAdd={handleAdd}
-        />
+        {item.pdf && <a className="pdf-download" href={withBase(item.pdf)} download><span aria-hidden="true">PDF</span><span><strong>Descargar ficha técnica</strong><small>Documento en formato PDF</small></span><span aria-hidden="true">↓</span></a>}
+        {item.pendingDocument && (
+          <aside className="pending-sheet" aria-label="Ficha técnica preliminar">
+            <strong>Ficha técnica preliminar</strong>
+            <span>El PDF identifica el producto y señala expresamente los datos que todavía requieren confirmación.</span>
+            <small>Campos pendientes: {item.pendingDocument.pendingFields.join(", ")}.</small>
+          </aside>
+        )}
+        <ItemCount stock={item.stock ?? 99} initial={1} onAdd={handleAdd} />
         {added > 0 && (
           <p className="cart-confirmation" role="status">
             Agregaste {added} {added === 1 ? "unidad" : "unidades"}. <Link to="/cart">Ver pedido</Link>
           </p>
         )}
       </div>
-    </div>
+    </article>
   );
 }

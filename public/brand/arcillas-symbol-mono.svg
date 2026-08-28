@@ -1,0 +1,5 @@
+<svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 96 96" role="img" aria-labelledby="title">
+  <title id="title">Símbolo monocromático de Arcillas Argentinas</title>
+  <defs><mask id="strata"><rect width="96" height="96" fill="white"/><path d="M23 50c18-6 34 6 51-1M21 66c18-5 38 6 56-2" fill="none" stroke="black" stroke-width="3.5"/></mask></defs>
+  <path d="M29 12h38v10H29zM31 22h34c0 7 5 11 9 18 8 14 6 30-5 43-6 7-36 7-42 0-11-13-13-29-5-43 4-7 9-11 9-18Z" fill="#0b2d36" mask="url(#strata)"/>
+</svg>

@@ -24,10 +24,10 @@ export default function ItemListContainer() {
 
   if (loading) return <Loader />;
   return (
-    <section className="container">
+    <section aria-live="polite">
+      <p className="results-count">{items.length} {items.length === 1 ? "producto" : "productos"}</p>
       <ItemList items={items} />
     </section>
   );
 }
-
 

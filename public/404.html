@@ -1,0 +1,18 @@
+<!doctype html>
+<html lang="es">
+  <head>
+    <meta charset="utf-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1" />
+    <title>Redirigiendo | Arcillas Argentinas</title>
+    <script>
+      (function (location) {
+        var segmentsToKeep = 1;
+        var base = location.pathname.split("/").slice(0, 1 + segmentsToKeep).join("/");
+        var route = location.pathname.split("/").slice(1 + segmentsToKeep).join("/").replace(/&/g, "~and~");
+        var query = location.search ? "&" + location.search.slice(1).replace(/&/g, "~and~") : "";
+        location.replace(location.protocol + "//" + location.host + base + "/?/" + route + query + location.hash);
+      }(window.location));
+    </script>
+  </head>
+  <body><p>Redirigiendo a Arcillas Argentinas…</p></body>
+</html>

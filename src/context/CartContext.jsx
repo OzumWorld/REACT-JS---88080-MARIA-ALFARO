@@ -1,4 +1,5 @@
 import { createContext, useContext, useState, useEffect } from "react";
+import { calculateCartTotal, getUnitPriceForQuantity } from "../lib/pricing.js";
 
 const CartContext = createContext();
 // El hook comparte este módulo con el provider para conservar la API existente.
@@ -23,19 +24,20 @@ export function CartProvider({ children }) {
       const found = prev.find((p) => p.id === item.id);
       if (found) {
         return prev.map((p) =>
-          p.id === item.id
-            ? { ...p, cantidad: Math.min(p.cantidad + qty, item.stock) }
-            : p
+          p.id === item.id ? (() => {
+            const cantidad = Math.min(p.cantidad + qty, item.stock);
+            return { ...p, cantidad, precio: getUnitPriceForQuantity({ ...p, ...item }, cantidad) };
+          })() : p
         );
       }
-      return [...prev, { ...item, cantidad: qty }];
+      return [...prev, { ...item, cantidad: qty, precio: getUnitPriceForQuantity(item, qty) }];
     });
   };
 
   const removeItem = (id) => setCart(cart.filter((p) => p.id !== id));
   const clear = () => setCart([]);
   const totalUnits = cart.reduce((acc, p) => acc + p.cantidad, 0);
-  const totalPrice = cart.reduce((acc, p) => acc + p.cantidad * p.precio, 0);
+  const totalPrice = calculateCartTotal(cart);
 
   return (
     <CartContext.Provider
