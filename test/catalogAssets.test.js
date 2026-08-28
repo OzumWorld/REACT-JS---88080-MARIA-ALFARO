@@ -24,19 +24,14 @@ test("cada producto activo tiene imagen y sólo usa una ficha original asociada"
     const info = PRODUCT_INFO[aliases[product.id] || product.id];
     assert.ok(info, `Falta información para ${product.id}`);
     if (product.id === "pasta-gres-blanco") {
-      assert.equal(info.img, null);
-      assert.equal(info.pendingImage, "/img/RARKNAgWgJnNhlVqoSlc8sw5EAPB4u5zyoVdwGA4-2.jpg");
+      assert.equal(info.img, "/img/RARKNAgWgJnNhlVqoSlc8sw5EAPB4u5zyoVdwGA4-2.jpg");
+      assert.equal(existsSync(`public${info.img}`), true, `No existe ${info.img}`);
       assert.equal(info.pendingDocument.fileName, "Pasta Gres Blanco.pdf");
       assert.equal(info.pdf, null);
       continue;
     }
-    if (product.id === "barbotina-gres-tostado-oscuro") {
-      assert.equal(info.img, null);
-      assert.equal(info.pendingImage, "/img/qIMurfX4CeA3F0Pufc2FYYVMnBs0DkUMho65yZpG.jpg");
-    } else {
-      assert.ok(info.img, `Falta imagen para ${product.id}`);
-      assert.equal(existsSync(`public${info.img}`), true, `No existe ${info.img}`);
-    }
+    assert.ok(info.img, `Falta imagen para ${product.id}`);
+    assert.equal(existsSync(`public${info.img}`), true, `No existe ${info.img}`);
     if (product.id === "barbotina-canje") {
       assert.equal(info.pdf, null, "Barbotina Canje debe esperar una ficha original confirmada");
       continue;
@@ -116,17 +111,18 @@ test("los tres Gres de 5 kg comparten la lista confirmada de agosto", () => {
 
 test("el catálogo conserva todos los precios confirmados de agosto de 2026", () => {
   const expectedPrices = {
-    "pasta-lisa-blanca": [13500, 12500, 12000],
-    "pasta-blanca-con-chamote": [10000, 9500, 9000],
-    "pasta-roja": [10000, 9500, 9000],
-    "pasta-roja-con-chamote": [10000, 9500, 9000],
-    "pasta-roja-fuego-directo": [10000, 9500, 9000],
+    "pasta-lisa-blanca": [16500, 16000, 15500],
+    "pasta-blanca-con-chamote": [13500, 13000, 12500],
+    "pasta-roja": [13500, 13000, 12500],
+    "pasta-roja-con-chamote": [13500, 13000, 12500],
+    "pasta-roja-fuego-directo": [13500, 13000, 12500],
     "pasta-gres-tostado-claro": [13500, 13000, 12500],
     "pasta-gres-tostado-oscura": [13500, 13000, 12500],
     "pasta-gres-blanco": [13500, 13000, 12500],
-    barbotina: [12000, 10000, 10000],
-    "barbotina-canje": [9500, 8500, 8500],
-    "barbotina-gres-tostado-oscuro": [14000, 12000, 12000],
+    "pasta-raku": [16000, 15500, 15000],
+    barbotina: [15500, 14500, null],
+    "barbotina-canje": [14000, 13000, null],
+    "barbotina-gres-tostado-oscuro": [19000, 18000, null],
   };
 
   assert.equal(CATALOGO.length, Object.keys(expectedPrices).length);
@@ -135,13 +131,13 @@ test("el catálogo conserva todos los precios confirmados de agosto de 2026", ()
   }
 });
 
-test("la foto real de Gres Blanco queda asociada sin sustitución", { skip: !existsSync("public/img/RARKNAgWgJnNhlVqoSlc8sw5EAPB4u5zyoVdwGA4-2.jpg") ? "Falta compartir el binario original RARKNAgWgJnNhlVqoSlc8sw5EAPB4u5zyoVdwGA4-2.jpg" : false }, () => {
+test("la foto real de Gres Blanco queda asociada sin sustitución", () => {
   assert.equal(existsSync("public/img/RARKNAgWgJnNhlVqoSlc8sw5EAPB4u5zyoVdwGA4-2.jpg"), true);
 });
 
 test("las imágenes confirmadas de barbotina quedan vinculadas al producto correcto", () => {
-  assert.equal(PRODUCT_INFO.barbotina.confirmedImage, "/img/Q543gzgDz8YSZG2YsSJQFqGQLwPwKZtkiygGL0FB.jpg");
-  assert.equal(PRODUCT_INFO["barbotina-gres-tostado-oscuro"].pendingImage, "/img/qIMurfX4CeA3F0Pufc2FYYVMnBs0DkUMho65yZpG.jpg");
+  assert.equal(PRODUCT_INFO.barbotina.img, "/img/Q543gzgDz8YSZG2YsSJQFqGQLwPwKZtkiygGL0FB.jpg");
+  assert.equal(PRODUCT_INFO["barbotina-gres-tostado-oscuro"].img, "/img/qIMurfX4CeA3F0Pufc2FYYVMnBs0DkUMho65yZpG.jpg");
 });
 
 test("los bidones industriales grandes quedan fuera del catálogo y del despliegue", () => {

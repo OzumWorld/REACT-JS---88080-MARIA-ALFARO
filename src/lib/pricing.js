@@ -3,7 +3,7 @@ export function getUnitPriceForQuantity(product, quantity) {
   const tiers = product?.precios;
 
   if (!tiers) return Number(product?.precio) || 0;
-  if (units >= 20) return Number(tiers.pack20);
+  if (units >= 20 && tiers.pack20 != null && Number.isFinite(Number(tiers.pack20))) return Number(tiers.pack20);
   if (units >= 10) return Number(tiers.pack10);
   return Number(tiers.unidad);
 }

@@ -5,25 +5,27 @@ import { BARBOTINA_CANJE_CONDITION } from "../config/commercialConditions.js";
 
 export const CATALOGO = [
     { id: "pasta-lisa-blanca", nombre: "Pasta Lisa Blanca (bolsa 10 kg)", tipo: "pasta",
-    precios:{ unidad:13500, pack10:12500, pack20:12000 } },
+    precios:{ unidad:16500, pack10:16000, pack20:15500 } },
     { id: "pasta-blanca-con-chamote", nombre: "Pasta Blanca con Chamote (bolsa 5 kg)", tipo: "pasta",
-      precios:{ unidad:10000, pack10:9500, pack20:9000 } },
+      precios:{ unidad:13500, pack10:13000, pack20:12500 } },
     { id: "pasta-roja", nombre: "Pasta Roja (bolsa 5 kg)", tipo: "pasta",
-      precios:{ unidad:10000, pack10:9500, pack20:9000 } },
+      precios:{ unidad:13500, pack10:13000, pack20:12500 } },
     { id: "pasta-roja-con-chamote", nombre: "Pasta Roja con Chamote (bolsa 5 kg)", tipo: "pasta",
-      precios:{ unidad:10000, pack10:9500, pack20:9000 } },
+      precios:{ unidad:13500, pack10:13000, pack20:12500 } },
     { id: "pasta-roja-fuego-directo", nombre: "Pasta Roja Fuego Directo (bolsa 5 kg)", tipo: "pasta",
-      precios:{ unidad:10000, pack10:9500, pack20:9000 } },
+      precios:{ unidad:13500, pack10:13000, pack20:12500 } },
     { id: "pasta-gres-tostado-claro", nombre: "Pasta Gres Tostado Claro (bolsa 5 kg)", tipo: "pasta",
       precios:{ unidad:13500, pack10:13000, pack20:12500 } },
     { id: "pasta-gres-tostado-oscura", nombre: "Pasta Gres Tostado Oscura (bolsa 5 kg)", tipo: "pasta",
       precios:{ unidad:13500, pack10:13000, pack20:12500 } },
     { id: "pasta-gres-blanco", nombre: "Pasta Gres Blanco (bolsa 5 kg)", tipo: "pasta",
       precios:{ unidad:13500, pack10:13000, pack20:12500 } },
+    { id: "pasta-raku", nombre: "Pasta Raku (bolsa 5 kg)", tipo: "pasta",
+      precios:{ unidad:16000, pack10:15500, pack20:15000 } },
 
-    { id: "barbotina", nombre: "Barbotina bidón 9 kg", tipo: "barbotina", precios:{unidad:12000, pack10:10000, pack20:10000} },
-    { id: "barbotina-canje", nombre: "Barbotina Canje bidón 9 kg", tipo: "barbotina", precios:{unidad:9500, pack10:8500, pack20:8500} },
-    { id: "barbotina-gres-tostado-oscuro", nombre: "Barbotina Gres Tostado Oscuro bidón 9 kg", tipo: "barbotina", precios:{unidad:14000, pack10:12000, pack20:12000} },
+    { id: "barbotina", nombre: "Barbotina con bidón 9 kg", tipo: "barbotina", precios:{unidad:15500, pack10:14500, pack20:null} },
+    { id: "barbotina-canje", nombre: "Barbotina sin bidón con canje 9 kg", tipo: "barbotina", precios:{unidad:14000, pack10:13000, pack20:null} },
+    { id: "barbotina-gres-tostado-oscuro", nombre: "Barbotina para Gres bidón 9 kg", tipo: "barbotina", precios:{unidad:19000, pack10:18000, pack20:null} },
   ];
   
   export const PRODUCT_INFO = {
@@ -74,30 +76,32 @@ export const CATALOGO = [
       coccion: null,
       pdf: null,
       pendingDocument: getPendingProductDocument("pasta-gres-blanco"),
-      img: null,
-      pendingImage: "/img/RARKNAgWgJnNhlVqoSlc8sw5EAPB4u5zyoVdwGA4-2.jpg"
+      img: "/img/RARKNAgWgJnNhlVqoSlc8sw5EAPB4u5zyoVdwGA4-2.jpg"
+    },
+    "pasta-raku": {
+      resumen: "Pasta para técnicas de Raku en presentación de 5 kg.",
+      coccion: "Consultar ficha técnica",
+      pdf: getProductDocumentPath("pasta-raku"),
+      img: "/img/Pasta Raku.jpg"
     },
     "barbotina": {
       resumen: "Lista para colada. Agitar antes de usar.",
       coccion: "Según pasta final",
       pdf: getProductDocumentPath("barbotina"),
-      img: "/img/Barbotina bidon 9 kg.jpg",
-      confirmedImage: "/img/Q543gzgDz8YSZG2YsSJQFqGQLwPwKZtkiygGL0FB.jpg"
+      img: "/img/Q543gzgDz8YSZG2YsSJQFqGQLwPwKZtkiygGL0FB.jpg"
     },
     "barbotina-canje": {
       resumen: "Barbotina Canje en presentación de 9 kg.",
       coccion: "Dato técnico pendiente de confirmación",
       commercialCondition: BARBOTINA_CANJE_CONDITION,
       pdf: null,
-      img: "/img/Barbotina bidon 9 kg.jpg",
-      confirmedImage: "/img/Q543gzgDz8YSZG2YsSJQFqGQLwPwKZtkiygGL0FB.jpg"
+      img: "/img/Q543gzgDz8YSZG2YsSJQFqGQLwPwKZtkiygGL0FB.jpg"
     },
     "barbotina-gres-tostado-oscuro": {
       resumen: "Colada para gres. Curva de alta.",
       coccion: "1240–1250 °C",
       pdf: getProductDocumentPath("barbotina-gres-tostado-oscuro"),
-      img: null,
-      pendingImage: "/img/qIMurfX4CeA3F0Pufc2FYYVMnBs0DkUMho65yZpG.jpg"
+      img: "/img/qIMurfX4CeA3F0Pufc2FYYVMnBs0DkUMho65yZpG.jpg"
     }
   };
 

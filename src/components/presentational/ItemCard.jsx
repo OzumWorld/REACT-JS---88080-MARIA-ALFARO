@@ -22,7 +22,7 @@ export default function ItemCard({ prod }) {
         {prod.coccion && <p className="product-card__data"><span>Cocción</span><strong>{prod.coccion}</strong></p>}
         {prod.precio !== undefined && <p className="price">{prod.precio.toLocaleString("es-AR", { style: "currency", currency: "ARS", maximumFractionDigits: 0 })}</p>}
         {prod.precios && (
-          <p className="product-card__tiers">10+: {prod.precios.pack10.toLocaleString("es-AR", { style: "currency", currency: "ARS", maximumFractionDigits: 0 })} c/u · 20+: {prod.precios.pack20.toLocaleString("es-AR", { style: "currency", currency: "ARS", maximumFractionDigits: 0 })} c/u</p>
+          <p className="product-card__tiers">10+: {prod.precios.pack10.toLocaleString("es-AR", { style: "currency", currency: "ARS", maximumFractionDigits: 0 })} c/u{Number.isFinite(prod.precios.pack20) ? ` · 20+: ${prod.precios.pack20.toLocaleString("es-AR", { style: "currency", currency: "ARS", maximumFractionDigits: 0 })} c/u` : ""}</p>
         )}
         <div className="product-card__actions">
           {prod.stock === 0 ? <p className="stock-status">Sin stock</p> : <Link to={`/productos/item/${prod.id}`} className="btn btn--ink">Ver detalle</Link>}

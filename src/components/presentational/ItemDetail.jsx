@@ -40,7 +40,7 @@ export default function ItemDetail({ item }) {
           <dl className="price-tiers" aria-label="Precios por cantidad">
             <div><dt>1 a 9 unidades</dt><dd>{item.precios.unidad.toLocaleString("es-AR", { style: "currency", currency: "ARS", maximumFractionDigits: 0 })} c/u</dd></div>
             <div><dt>Desde 10 unidades</dt><dd>{item.precios.pack10.toLocaleString("es-AR", { style: "currency", currency: "ARS", maximumFractionDigits: 0 })} c/u</dd></div>
-            <div><dt>Desde 20 unidades</dt><dd>{item.precios.pack20.toLocaleString("es-AR", { style: "currency", currency: "ARS", maximumFractionDigits: 0 })} c/u</dd></div>
+            {Number.isFinite(item.precios.pack20) && <div><dt>Desde 20 unidades</dt><dd>{item.precios.pack20.toLocaleString("es-AR", { style: "currency", currency: "ARS", maximumFractionDigits: 0 })} c/u</dd></div>}
           </dl>
         )}
         {item.pdf && <a className="pdf-download" href={withBase(item.pdf)} download><span aria-hidden="true">PDF</span><span><strong>Descargar ficha técnica</strong><small>Documento en formato PDF</small></span><span aria-hidden="true">↓</span></a>}
