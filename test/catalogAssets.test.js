@@ -135,6 +135,11 @@ test("la foto real de Gres Blanco queda asociada sin sustitución", () => {
   assert.equal(existsSync("public/img/RARKNAgWgJnNhlVqoSlc8sw5EAPB4u5zyoVdwGA4-2.jpg"), true);
 });
 
+test("Pasta Raku usa la última imagen confirmada por la distribuidora", () => {
+  assert.equal(PRODUCT_INFO["pasta-raku"].img, "/img/lFQej9H0B67Y18F6s7Ney1i5emJP9rtceXqgTMHU.jpg");
+  assert.equal(existsSync("public/img/lFQej9H0B67Y18F6s7Ney1i5emJP9rtceXqgTMHU.jpg"), true);
+});
+
 test("las imágenes confirmadas de barbotina quedan vinculadas al producto correcto", () => {
   assert.equal(PRODUCT_INFO.barbotina.img, "/img/Q543gzgDz8YSZG2YsSJQFqGQLwPwKZtkiygGL0FB.jpg");
   assert.equal(PRODUCT_INFO["barbotina-gres-tostado-oscuro"].img, "/img/qIMurfX4CeA3F0Pufc2FYYVMnBs0DkUMho65yZpG.jpg");

@@ -82,7 +82,7 @@ export const CATALOGO = [
       resumen: "Pasta para técnicas de Raku en presentación de 5 kg.",
       coccion: "Consultar ficha técnica",
       pdf: getProductDocumentPath("pasta-raku"),
-      img: "/img/Pasta Raku.jpg"
+      img: "/img/lFQej9H0B67Y18F6s7Ney1i5emJP9rtceXqgTMHU.jpg"
     },
     "barbotina": {
       resumen: "Lista para colada. Agitar antes de usar.",
