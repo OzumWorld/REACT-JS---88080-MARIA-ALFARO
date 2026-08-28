@@ -35,11 +35,13 @@ test("cada producto activo tiene imagen y sólo usa una ficha original asociada"
   }
 });
 
-test("GitHub Pages incluye recuperación de rutas internas", () => {
+test("el dominio propio incluye recuperación de rutas internas", () => {
   const fallback = readFileSync("public/404.html", "utf8");
   const index = readFileSync("index.html", "utf8");
-  assert.match(fallback, /segmentsToKeep = 1/);
+  const vite = readFileSync("vite.config.js", "utf8");
+  assert.match(fallback, /segmentsToKeep = 0/);
   assert.match(index, /location\.search\.startsWith\("\?\/"\)/);
+  assert.match(vite, /base: '\/'/);
 });
 
 test("la identidad del documento ya no usa Vite", () => {
