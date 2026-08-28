@@ -79,6 +79,16 @@ test("la operación pública continúa basada en retiro y no promete envíos nac
   assert.doesNotMatch(publicCopy, /envíos nacionales|cálculo de envío|tarifa de envío|entregamos en todo el país/i);
 });
 
+test("el carrito solicita el punto de retiro antes de continuar", () => {
+  const cart = readFileSync("src/components/Cart.jsx", "utf8");
+  const checkout = readFileSync("src/pages/Checkout.jsx", "utf8");
+  assert.match(cart, /ACTIVE_PICKUP_POINTS/);
+  assert.match(cart, /Punto de retiro/);
+  assert.match(cart, /Elegí dónde retirar/);
+  assert.match(cart, /disabled=\{!pickupPointId\}/);
+  assert.match(checkout, /location\.state\?\.pickupPointId/);
+});
+
 test("la condición de canje está centralizada y no se aplica a otras barbotinas", () => {
   const config = readFileSync("src/config/commercialConditions.js", "utf8");
   const canje = PRODUCT_INFO["barbotina-canje"];

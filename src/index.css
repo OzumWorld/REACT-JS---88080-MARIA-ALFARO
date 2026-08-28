@@ -228,6 +228,11 @@ p { line-height: 1.65; }
 .cart-summary .btn--outline { color: #fff9f0; border-color: rgba(255,249,240,.75); }
 .cart-summary .btn--outline:hover { color: var(--brand-clay-dark); background: #fff9f0; }
 .cart-summary__total { font-family: Georgia, serif; font-size: 1.25rem; }
+.cart-summary__actions { display: grid; width: min(100%, 440px); gap: .55rem; }
+.cart-summary__actions > label { font-size: .82rem; font-weight: 800; }
+.cart-summary__actions > select { color: var(--brand-text); background: #fffaf2; }
+.cart-summary__actions > small { color: rgba(255,249,240,.82); line-height: 1.4; }
+.cart-summary__actions .button-row { justify-content: flex-end; }
 .empty-state { min-height: 55vh; display: grid; place-content: center; justify-items: start; }
 .empty-state h1 { color: var(--brand-ink-dark); font-size: clamp(2.4rem, 5vw, 4rem); }
 

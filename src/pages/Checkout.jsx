@@ -1,5 +1,5 @@
 import { useState } from "react";
-import { Link } from "react-router-dom";
+import { Link, useLocation } from "react-router-dom";
 import { useCart } from "../context/CartContext.jsx";
 import { createOrder } from "../helpers/fetchData.js";
 import { ACTIVE_PICKUP_POINTS, getPickupPointById } from "../config/pickupPoints.js";
@@ -8,8 +8,9 @@ import { BARBOTINA_CANJE_CONDITION, cartIncludesBarbotinaCanje } from "../config
 
 export default function Checkout() {
   const { cart, totalPrice, clear } = useCart();
+  const location = useLocation();
   const [buyer, setBuyer] = useState({ name: "", email: "", phone: "" });
-  const [pickupPointId, setPickupPointId] = useState("");
+  const [pickupPointId, setPickupPointId] = useState(() => getPickupPointById(location.state?.pickupPointId)?.id || "");
   const [loading, setLoading] = useState(false);
   const [error, setError] = useState("");
   const includesBarbotinaCanje = cartIncludesBarbotinaCanje(cart);
