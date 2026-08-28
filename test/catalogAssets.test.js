@@ -88,6 +88,12 @@ test("la condición de canje está centralizada y no se aplica a otras barbotina
   assert.equal(PRODUCT_INFO["barbotina-gres-tostado-oscuro"].commercialCondition, undefined);
 });
 
+test("la barbotina común y su modalidad de canje comparten la cocción confirmada", () => {
+  assert.equal(PRODUCT_INFO.barbotina.coccion, "1020-1040 °C");
+  assert.equal(PRODUCT_INFO["barbotina-canje"].coccion, "1020-1040 °C");
+  assert.equal(PRODUCT_INFO["barbotina-gres-tostado-oscuro"].coccion, "1240–1250 °C");
+});
+
 test("Pasta Gres Blanco conserva presentación y precios confirmados", () => {
   const product = CATALOGO.find((item) => item.id === "pasta-gres-blanco");
   assert.ok(product);
