@@ -9,7 +9,7 @@ export default function TechnicalSheets() {
           <p className="eyebrow eyebrow--dark">Documentación original</p>
           <h2 id="technical-sheets-title">Fichas técnicas</h2>
         </div>
-        <p>Diez documentos originales, asociados por el nombre exacto de cada material.</p>
+        <p>Once fichas disponibles, asociadas por el nombre exacto de cada material.</p>
       </div>
       <ul className="technical-sheets__grid">
         {PRODUCT_DOCUMENTS.map((document) => (
@@ -20,7 +20,7 @@ export default function TechnicalSheets() {
           </li>
         ))}
       </ul>
-      <p className="technical-sheets__note">Barbotina Canje permanece sin ficha asociada hasta confirmar su documento original. Pasta Raku se ofrece aquí como documentación y no se incorpora automáticamente al catálogo comercial.</p>
+      <p className="technical-sheets__note">Barbotina Canje permanece sin ficha asociada hasta confirmar su documento original. Pasta Raku está disponible en el catálogo comercial con su ficha técnica.</p>
     </section>
   );
 }
