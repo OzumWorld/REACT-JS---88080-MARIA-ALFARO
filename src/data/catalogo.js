@@ -33,31 +33,31 @@ export const CATALOGO = [
       resumen: "Utilitaria y artística fina. Torneado, modelado y placas.",
       coccion: "1020–1040 °C",
       pdf: getProductDocumentPath("pasta-lisa-blanca"),
-      img: "/img/Pasta Lisa Blanca.jpg"
+      img: "/img/Ry0cc3fxkSio5IBTbbtfdKJsdfFi5gvFbgYRmJVz.jpg"
     },
     "pasta-blanca-con-chamote": {
       resumen: "Piezas medianas/grandes, escultura, relieves.",
       coccion: "1020–1040 °C",
       pdf: getProductDocumentPath("pasta-blanca-con-chamote"),
-      img: "/img/Pasta Blanca con Chamote.jpg"
+      img: "/img/babjs0Ks0AvgSWQnwBJaHMCk0Gsz0TCMrfO2XXuK.jpg"
     },
     "pasta-roja": {
       resumen: "Versátil para modelado y placas; look cálido.",
       coccion: "1020–1040 °C",
       pdf: getProductDocumentPath("pasta-roja"),
-      img: "/img/Pasta Roja.jpg"
+      img: "/img/S2L3H182VNh8KmSgLLMIKCNNgvb62WjVyvu0qSxZ.jpg"
     },
     "pasta-roja-con-chamote": {
       resumen: "Textura + estabilidad para piezas medianas y escultura.",
       coccion: "1020–1040 °C",
       pdf: getProductDocumentPath("pasta-roja-con-chamote"),
-      img: "/img/Pasta Roja con Chamote.jpg"
+      img: "/img/ZHySGnePKhP4rdckhrwc0VcMhd0t8ivS5i8hK0mg.jpg"
     },
     "pasta-fuego-directo": {
       resumen: "Cazuelas / hornallas. Buena resistencia térmica.",
       coccion: "1020–1040 °C",
       pdf: getProductDocumentPath("pasta-roja-fuego-directo"),
-      img: "/img/Pasta Roja Fuego Directo.jpg"
+      img: "/img/ARtb8X5sKj6eKZybZTsHWJmI9bgEF4vAPe2pspEj.jpg"
     },
     "pasta-gres-tostado-claro": {
       resumen: "Alta resistencia para utilitario. Cone 6–7.",
@@ -69,7 +69,7 @@ export const CATALOGO = [
       resumen: "Base cálida para esmaltes de alta.",
       coccion: "1240–1250 °C",
       pdf: getProductDocumentPath("pasta-gres-tostado-oscura"),
-      img: "/img/Pasta Gres Tostado Oscuro.jpg"
+      img: "/img/AtYHdHjt1DDQ8KJ11lafBVuxOYtO01KdbmBhkqJP.jpg"
     },
     "pasta-gres-blanco": {
       resumen: "Pasta Gres Blanco en presentación de 5 kg.",

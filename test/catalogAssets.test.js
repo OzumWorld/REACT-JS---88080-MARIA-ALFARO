@@ -145,6 +145,22 @@ test("Gres Tostado Claro usa la última imagen confirmada", () => {
   assert.equal(existsSync("public/img/KAnQ3tOUwH2DUS3hPozWPyO9BkBcuJvzWpkmGz0k.jpg"), true);
 });
 
+test("las seis pastas restantes usan las últimas imágenes confirmadas", () => {
+  const expected = {
+    "pasta-fuego-directo": "/img/ARtb8X5sKj6eKZybZTsHWJmI9bgEF4vAPe2pspEj.jpg",
+    "pasta-roja": "/img/S2L3H182VNh8KmSgLLMIKCNNgvb62WjVyvu0qSxZ.jpg",
+    "pasta-roja-con-chamote": "/img/ZHySGnePKhP4rdckhrwc0VcMhd0t8ivS5i8hK0mg.jpg",
+    "pasta-lisa-blanca": "/img/Ry0cc3fxkSio5IBTbbtfdKJsdfFi5gvFbgYRmJVz.jpg",
+    "pasta-gres-tostado-oscuro": "/img/AtYHdHjt1DDQ8KJ11lafBVuxOYtO01KdbmBhkqJP.jpg",
+    "pasta-blanca-con-chamote": "/img/babjs0Ks0AvgSWQnwBJaHMCk0Gsz0TCMrfO2XXuK.jpg",
+  };
+
+  for (const [productId, imagePath] of Object.entries(expected)) {
+    assert.equal(PRODUCT_INFO[productId].img, imagePath);
+    assert.equal(existsSync(`public${imagePath}`), true, `No existe ${imagePath}`);
+  }
+});
+
 test("las imágenes confirmadas de barbotina quedan vinculadas al producto correcto", () => {
   assert.equal(PRODUCT_INFO.barbotina.img, "/img/Q543gzgDz8YSZG2YsSJQFqGQLwPwKZtkiygGL0FB.jpg");
   assert.equal(PRODUCT_INFO["barbotina-gres-tostado-oscuro"].img, "/img/qIMurfX4CeA3F0Pufc2FYYVMnBs0DkUMho65yZpG.jpg");
