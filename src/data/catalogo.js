@@ -84,13 +84,13 @@ export const CATALOGO = [
     },
     "barbotina": {
       resumen: "Lista para colada. Agitar antes de usar.",
-      coccion: "Según pasta final",
+      coccion: "1020-1040 °C",
       pdf: getProductDocumentPath("barbotina"),
       img: "/img/Q543gzgDz8YSZG2YsSJQFqGQLwPwKZtkiygGL0FB.jpg"
     },
     "barbotina-canje": {
       resumen: "Barbotina Canje en presentación de 9 kg.",
-      coccion: "Dato técnico pendiente de confirmación",
+      coccion: "1020-1040 °C",
       commercialCondition: BARBOTINA_CANJE_CONDITION,
       pdf: null,
       img: "/img/Q543gzgDz8YSZG2YsSJQFqGQLwPwKZtkiygGL0FB.jpg"
