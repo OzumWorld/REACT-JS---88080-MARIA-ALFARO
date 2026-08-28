@@ -11,9 +11,9 @@ const aliases = {
 
 const originalPdfNames = new Set(PRODUCT_DOCUMENTS.map((document) => document.fileName));
 
-test("las diez fichas PDF originales permanecen disponibles", () => {
-  assert.equal(originalPdfNames.size, 10);
-  assert.equal(new Set(PRODUCT_DOCUMENTS.map((document) => document.productId)).size, 10);
+test("las fichas PDF disponibles permanecen asociadas sin duplicados", () => {
+  assert.equal(originalPdfNames.size, 11);
+  assert.equal(new Set(PRODUCT_DOCUMENTS.map((document) => document.productId)).size, 11);
   for (const name of originalPdfNames) {
     assert.equal(existsSync(`public/fichas/${name}`), true, `No existe ${name}`);
   }
@@ -23,15 +23,6 @@ test("cada producto activo tiene imagen y sólo usa una ficha original asociada"
   for (const product of CATALOGO) {
     const info = PRODUCT_INFO[aliases[product.id] || product.id];
     assert.ok(info, `Falta información para ${product.id}`);
-    if (product.id === "pasta-gres-blanco") {
-      assert.equal(info.img, "/img/RARKNAgWgJnNhlVqoSlc8sw5EAPB4u5zyoVdwGA4-2.jpg");
-      assert.equal(existsSync(`public${info.img}`), true, `No existe ${info.img}`);
-      assert.equal(info.pendingDocument.fileName, "Pasta Gres Blanco.pdf");
-      assert.equal(info.pendingDocument.status, "preliminary");
-      assert.equal(info.pdf, "/fichas/Pasta Gres Blanco.pdf");
-      assert.equal(existsSync(`public${info.pdf}`), true, `No existe ${info.pdf}`);
-      continue;
-    }
     assert.ok(info.img, `Falta imagen para ${product.id}`);
     assert.equal(existsSync(`public${info.img}`), true, `No existe ${info.img}`);
     if (product.id === "barbotina-canje") {
@@ -102,6 +93,15 @@ test("Pasta Gres Blanco conserva presentación y precios confirmados", () => {
   assert.ok(product);
   assert.equal(product.nombre, "Pasta Gres Blanco (bolsa 5 kg)");
   assert.deepEqual(product.precios, { unidad: 13500, pack10: 13000, pack20: 12500 });
+});
+
+test("Pasta Gres Blanco publica los datos técnicos confirmados", () => {
+  const info = PRODUCT_INFO["pasta-gres-blanco"];
+  assert.equal(info.coccion, "1225-1230 °C (cono 5 1/2)");
+  assert.match(info.resumen, /Contracción 12%/);
+  assert.match(info.resumen, /absorción 2,33%/);
+  assert.equal(info.pdf, "/fichas/Pasta Gres Blanco.pdf");
+  assert.equal(info.pendingDocument, undefined);
 });
 
 test("los tres Gres de 5 kg comparten la lista confirmada de agosto", () => {

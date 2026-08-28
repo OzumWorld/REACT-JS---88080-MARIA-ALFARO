@@ -1,6 +1,5 @@
 
 import { getProductDocumentPath } from "../config/productDocuments.js";
-import { getPendingProductDocument } from "../config/productDocuments.js";
 import { BARBOTINA_CANJE_CONDITION } from "../config/commercialConditions.js";
 
 export const CATALOGO = [
@@ -72,10 +71,9 @@ export const CATALOGO = [
       img: "/img/AtYHdHjt1DDQ8KJ11lafBVuxOYtO01KdbmBhkqJP.jpg"
     },
     "pasta-gres-blanco": {
-      resumen: "Pasta Gres Blanco en presentación de 5 kg.",
-      coccion: null,
-      pdf: getPendingProductDocument("pasta-gres-blanco").path,
-      pendingDocument: getPendingProductDocument("pasta-gres-blanco"),
+      resumen: "Gres blanco para cono 5 1/2. Contracción 12% y absorción 2,33%.",
+      coccion: "1225-1230 °C (cono 5 1/2)",
+      pdf: getProductDocumentPath("pasta-gres-blanco"),
       img: "/img/RARKNAgWgJnNhlVqoSlc8sw5EAPB4u5zyoVdwGA4-2.jpg"
     },
     "pasta-raku": {
