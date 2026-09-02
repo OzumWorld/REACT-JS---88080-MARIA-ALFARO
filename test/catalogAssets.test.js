@@ -110,7 +110,7 @@ test("Pasta Gres Blanco conserva presentación y precios confirmados", () => {
   const product = CATALOGO.find((item) => item.id === "pasta-gres-blanco");
   assert.ok(product);
   assert.equal(product.nombre, "Pasta Gres Blanco (bolsa 5 kg)");
-  assert.deepEqual(product.precios, { unidad: 14500, pack10: 14000, pack20: 13500 });
+  assert.deepEqual(product.precios, { unidad: 14000, pack10: 13500, pack20: 13000 });
 });
 
 test("Pasta Gres Blanco publica los datos técnicos confirmados", () => {
@@ -133,23 +133,23 @@ test("las pastas Gres y Raku publican las temperaturas confirmadas", () => {
 test("los tres Gres de 5 kg comparten la lista confirmada de septiembre", () => {
   for (const id of ["pasta-gres-blanco", "pasta-gres-tostado-claro", "pasta-gres-tostado-oscura"]) {
     const product = CATALOGO.find((item) => item.id === id);
-    assert.deepEqual(product.precios, { unidad: 14500, pack10: 14000, pack20: 13500 });
+    assert.deepEqual(product.precios, { unidad: 14000, pack10: 13500, pack20: 13000 });
   }
 });
 
 test("el catálogo conserva todos los precios confirmados de septiembre de 2026", () => {
   const expectedPrices = {
     "pasta-lisa-blanca": [17500, 17000, 16500],
-    "pasta-blanca-con-chamote": [14500, 14000, 13500],
-    "pasta-roja": [14500, 14000, 13500],
-    "pasta-roja-con-chamote": [14500, 14000, 13500],
-    "pasta-roja-fuego-directo": [14500, 14000, 13500],
-    "pasta-gres-tostado-claro": [14500, 14000, 13500],
-    "pasta-gres-tostado-oscura": [14500, 14000, 13500],
-    "pasta-gres-blanco": [14500, 14000, 13500],
+    "pasta-blanca-con-chamote": [14000, 13500, 13000],
+    "pasta-roja": [14000, 13500, 13000],
+    "pasta-roja-con-chamote": [14000, 13500, 13000],
+    "pasta-roja-fuego-directo": [14000, 13500, 13000],
+    "pasta-gres-tostado-claro": [14000, 13500, 13000],
+    "pasta-gres-tostado-oscura": [14000, 13500, 13000],
+    "pasta-gres-blanco": [14000, 13500, 13000],
     "pasta-raku": [17000, 16500, 16000],
     barbotina: [16500, 15500, null],
-    "barbotina-canje": [15000, 14000, null],
+    "barbotina-canje": [14500, 13500, null],
     "barbotina-gres-tostado-oscuro": [20000, 19000, null],
   };
 
