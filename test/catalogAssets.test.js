@@ -110,7 +110,7 @@ test("Pasta Gres Blanco conserva presentación y precios confirmados", () => {
   const product = CATALOGO.find((item) => item.id === "pasta-gres-blanco");
   assert.ok(product);
   assert.equal(product.nombre, "Pasta Gres Blanco (bolsa 5 kg)");
-  assert.deepEqual(product.precios, { unidad: 13500, pack10: 13000, pack20: 12500 });
+  assert.deepEqual(product.precios, { unidad: 14500, pack10: 14000, pack20: 13500 });
 });
 
 test("Pasta Gres Blanco publica los datos técnicos confirmados", () => {
@@ -130,27 +130,27 @@ test("las pastas Gres y Raku publican las temperaturas confirmadas", () => {
   assert.equal(PRODUCT_INFO["pasta-raku"].coccion, "1300 °C");
 });
 
-test("los tres Gres de 5 kg comparten la lista confirmada de agosto", () => {
+test("los tres Gres de 5 kg comparten la lista confirmada de septiembre", () => {
   for (const id of ["pasta-gres-blanco", "pasta-gres-tostado-claro", "pasta-gres-tostado-oscura"]) {
     const product = CATALOGO.find((item) => item.id === id);
-    assert.deepEqual(product.precios, { unidad: 13500, pack10: 13000, pack20: 12500 });
+    assert.deepEqual(product.precios, { unidad: 14500, pack10: 14000, pack20: 13500 });
   }
 });
 
-test("el catálogo conserva todos los precios confirmados de agosto de 2026", () => {
+test("el catálogo conserva todos los precios confirmados de septiembre de 2026", () => {
   const expectedPrices = {
-    "pasta-lisa-blanca": [16500, 16000, 15500],
-    "pasta-blanca-con-chamote": [13500, 13000, 12500],
-    "pasta-roja": [13500, 13000, 12500],
-    "pasta-roja-con-chamote": [13500, 13000, 12500],
-    "pasta-roja-fuego-directo": [13500, 13000, 12500],
-    "pasta-gres-tostado-claro": [13500, 13000, 12500],
-    "pasta-gres-tostado-oscura": [13500, 13000, 12500],
-    "pasta-gres-blanco": [13500, 13000, 12500],
-    "pasta-raku": [16000, 15500, 15000],
-    barbotina: [15500, 14500, null],
-    "barbotina-canje": [14000, 13000, null],
-    "barbotina-gres-tostado-oscuro": [19000, 18000, null],
+    "pasta-lisa-blanca": [17500, 17000, 16500],
+    "pasta-blanca-con-chamote": [14500, 14000, 13500],
+    "pasta-roja": [14500, 14000, 13500],
+    "pasta-roja-con-chamote": [14500, 14000, 13500],
+    "pasta-roja-fuego-directo": [14500, 14000, 13500],
+    "pasta-gres-tostado-claro": [14500, 14000, 13500],
+    "pasta-gres-tostado-oscura": [14500, 14000, 13500],
+    "pasta-gres-blanco": [14500, 14000, 13500],
+    "pasta-raku": [17000, 16500, 16000],
+    barbotina: [16500, 15500, null],
+    "barbotina-canje": [15000, 14000, null],
+    "barbotina-gres-tostado-oscuro": [20000, 19000, null],
   };
 
   assert.equal(CATALOGO.length, Object.keys(expectedPrices).length);
